@@ -32,11 +32,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#zf41@8)=ii-0tcl6v+bfu#p77(wd$q2-iklx175#0&3wtswwo'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost',
-                 '127.0.0.1', '*']
+                 '127.0.0.1','https://sms-production-c4a6.up.railway.app', '*']
 
 
 # Application definition
