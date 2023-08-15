@@ -1,0 +1,65 @@
+
+{% extends 'admin/base_template.html' %}
+
+
+{% block title %}
+
+Staff Documents
+{% endblock title %}
+  
+
+{% block content %}
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>
+              Staff Documents management</h1>
+            
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">management</a></li>
+              <li class="breadcrumb-item active">Staff Documents</h1>
+            
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        
+        <div class="row ">
+            <div class="col-sm-12">
+                <a href="#" class="btn btn-sm btn-info">
+
+                    <input type="checkbox" checked name="showForm" id="check"  hx-target="#formSection" hx-post=' {%  url "adminhod:show-or-hide-staffdocument-form" %} '> Show or Hide Form
+                </a>
+            </div>
+          <div class="col-sm card" id='formSection'>
+           
+
+           {% include 'admin/StaffDocumentPatial.html' %}
+          </div>
+
+          <div class="col-sm-12">
+         
+            {% for message in messages %}
+            <p class="text-success text-center">{{message}}</p>
+              
+            {% endfor %}
+            <div id="tableContent">
+            {% include 'admin/staffdocuments.html' %}
+              
+          </div>
+        </div>
+      </div>
+    <section>
+  <div>
+
+
+{% endblock content %}

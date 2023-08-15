@@ -1,0 +1,106 @@
+{% extends 'admin/base_template.html' %}
+
+{% block title %}
+Activities registration & management
+{% endblock title %}
+
+
+{% block content %}
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1> Extra  Curicular Activities Management</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#"> Extra Curicular Activities</a></li>
+              <li class="breadcrumb-item active">Management</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row ">
+    <div class="col-sm card">
+    
+
+      <form action="" method="post">
+            
+            {% csrf_token %}
+          <div class="card-body row ">
+          {% comment %} {{form.as_p}} {% endcomment %}
+          {% for field in form %}
+                {% if field.name == "description" %}
+                <div class="form-group col-sm-12">
+                  <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field}}
+                  
+                  <label class="text-info" for="exampleInputEmail1">{{field.help_text}} </label>
+                  
+                {% else %}
+                <div class="form-group col-sm-3">
+                  <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field}}
+                  <label class="text-info" for="exampleInputEmail1">{{field.help_text}} </label>
+                  
+                
+                {% endif %}
+                
+                
+                </div>
+             
+            
+          {% endfor %}
+         
+          <div class="form-group col-sm-12">
+            
+              <button type="submit" class="btn btn-info ml-5">Submit</button>
+          
+          </div>
+           
+          </div>
+
+          
+          
+      </form>
+    </div>
+
+    <div class="col-sm-12">
+      <h2 class="text-center text-warning bg-dark p-3">Activities </h2>
+      
+      {% for message in messages %}
+      <p class="text-success text-center">{{message}}</p>
+        
+      {% endfor %}
+<p class="text-center text-info bg-warning text-lg">Click on any of the activities to update</p>
+      {% for activity in activities %}
+      <div class="container p3">
+          <h5 class="text-success">{{activity.name|title}}</h5>
+          <a  href=" {% url 'school_info:update-activity' activity.id %} " class="text-dark text-center nav-link">{{activity.description|truncatewords:10}}</a>
+          
+
+             <a href="{% url 'school_info:delete-activity' activity.id %}" class="text-center float-right  badge badge-danger">Delete <i class="fa fa-trash"></i> </a>
+          
+              
+              
+        </div>
+        
+      {% endfor %}
+
+
+        
+    </div>
+  </div>
+      </div>
+    </section>
+ </div>
+  
+
+
+{% endblock content %}

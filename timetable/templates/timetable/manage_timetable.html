@@ -1,0 +1,66 @@
+{% extends 'admin/base_template.html' %}
+
+
+{% block title %}
+{% if title %}
+{{title}}
+{% else %}
+School Timetable Management
+{% endif %}
+{% endblock title %}
+  
+
+{% block content %}
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>School Timetable Management</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">School Timetable Management</a></li>
+              <li class="breadcrumb-item active">Management</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row ">
+            
+              <div class="card-body table-responsive pad">
+                <p class="mb-1">Select class or staff/teacher to view the timetable accordingly </p>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                  <input type="radio" name="options" id="option_a2" autocomplete="off" checked hx-get=" {% url 'timetable:get_by' 'staff' %} " hx-target="#formSection" hx-trigger="click"> Staff/Teacher
+                </label>
+
+                <label class="btn btn-secondary">
+                  <input type="radio" name="options" id="option_a3" autocomplete="off" hx-get=" {% url 'timetable:get_by' 'class' %} " hx-target="#formSection" hx-trigger="click"> Class
+                </label>
+                </div>
+           
+           
+    <div class="col-sm card" id="formSection">
+    
+      <div class="col-sm-12 card" id="filterForm">
+        {% include 'timetable/timetableFilterForm.html' %}
+      
+        </div>
+      </div>
+
+      <div class="col-sm-12" id="tableContent">
+        {% comment %} {% include 'timetable/printableTimetable.html' %} {% endcomment %}
+      </div>
+    </div>
+  </section>
+</div>
+  
+
+
+{% endblock content %}

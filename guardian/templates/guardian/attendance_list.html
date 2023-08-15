@@ -1,0 +1,54 @@
+
+
+ <div class="col-sm-12">
+      <h5 class="text-center text-warning bg-dark p-3">{{name|title}} Attendance Report</h5>
+     
+        
+      
+      <div>
+          <!-- {{attendance}} -->
+        <div class="card-body">
+          <div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+              <div id="message" ></div>
+              <div class="jsgrid-grid-header jsgrid-header-scrollbar" style="overflow-x:auto">
+                  <table class="jsgrid-table" border=2>
+                      <tr class="jsgrid-header-row">
+                          <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 250px;">Student Name</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 100px;">Class</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 200px;">Staff</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 110px;"> Subjcet</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 110px;"> Semester</th>
+
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 110px;"> status</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Date </th>
+                        </tr>
+                        {% for attendance in attendance %}
+                        
+                        <tr class="jsgrid-row">
+                            <td class="jsgrid-cell" style="width: 150px;">{{attendance.student_id.admin.username|title}}</td>
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">{{attendance.class_id}}</td>
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 200px;">{{attendance.staff_id.username|title}}</td>
+                            <td class="jsgrid-cell" style="width: 100px;">{{attendance.subject_id}}</td>
+                            <td class="jsgrid-cell" style="width: 110px;">{{attendance.semester}}</td>
+                          
+                            <td class="jsgrid-cell jsgrid-align-center" style="width: 110px;">
+                                {% if attendance.status == 1 %}
+                                <span class="text-success">present</span>
+                                {% else %}
+                                 <span class="text-danger">absent</span>
+                                {% endif %}
+                            </td>
+                              <td class="jsgrid-cell" style="width: 200px;">{{attendance.attendance_date}}</td>
+                        </tr>
+                         {% endfor %}
+                        </table>
+                    </div>
+                    <div class="jsgrid-load-panel" style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please, wait...</div>
+                </div>
+        </div>
+        
+     
+
+
+        
+    </div>

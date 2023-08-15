@@ -1,0 +1,21 @@
+<a class="nav-link" data-toggle="dropdown" href="#">
+    <i class="far fa-bell"></i>
+    {% if request.user.user_type == '2' %}
+    <span class="badge badge-warning navbar-badge">{{notify.count}}</span>
+    {% elif request.user.user_type == '3' %}
+    <span class="badge badge-warning navbar-badge">{{notify.count}}</span>
+    {% endif %}
+
+</a>
+<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+    <span class="dropdown-item dropdown-header">{{notify.count}} Notifications</span>
+    {% for notise in notify %}
+    <div class="dropdown-divider"></div>
+    <a href="#" class="dropdown-item">
+        <i class="fas fa-envelope mr-2"></i> {{notise.sender_name}}
+        <span class="float-right text-muted text-sm">{{notise.created_at}}</span>
+    </a>
+    {% endfor %}
+    <div class="dropdown-divider"></div>
+    <a href="#" hx-get='{% url "notification:notifications" %}' hx-target="#main-content" class="dropdown-item dropdown-footer">See All Notifications</a>
+</div>

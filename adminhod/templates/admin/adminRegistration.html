@@ -1,0 +1,75 @@
+
+{% extends 'admin/base_template.html' %}
+
+
+{% block title %}
+{% if title %}
+{{title}}
+{% else %}
+
+Register Administrators
+{% endif %}
+{% endblock title %}
+  
+
+{% block content %}
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>
+              {% if s_title %}
+              {{s_title}}
+              {% else %}
+              Register Administrator</h1>
+              {% endif %}
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Administrator</a></li>
+              <li class="breadcrumb-item active"> {% if s_title %}
+              {{s_title}}
+              {% else %}
+              Register</h1>
+              {% endif %}</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        
+        <div class="row ">
+            <div class="col-sm-12">
+                <a href="#" class="btn btn-sm btn-info">
+
+                    <input type="checkbox" checked name="showForm" id="check"  hx-target="#formSection" hx-post=' {%  url "adminhod:show-or-hide-form" %} '> Show or Hide Form
+                </a>
+            </div>
+          <div class="col-sm card" id='formSection'>
+           
+
+           {% include 'admin/adminRegPatialForm.html' %}
+          </div>
+
+          <div class="col-sm-12">
+         
+            {% for message in messages %}
+            <p class="text-success text-center">{{message}}</p>
+              
+            {% endfor %}
+            <div id="tableContent">
+            {% include 'admin/adminTable.html' %}
+              
+          </div>
+        </div>
+      </div>
+    <section>
+  <div>
+
+
+{% endblock content %}

@@ -1,0 +1,71 @@
+ <div class="container-fluid">
+      <div class="row">
+        {% for candidate in assignments %}
+
+        <div class="col-md-12">
+          <div class="card card-success collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title">
+                  Assignment By :
+                <span class="badge badge-danger"> {{candidate.staff.admin}}</span>
+                Subject : 
+                <span class="badge badge-warning">{{candidate.subject}}</span>
+              </h3>
+
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="maximize"
+                >
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body" style="display: none">
+              <div class="container-md row">
+               <div class="col-sm">
+                    {{candidate.admission_latter|safe}}
+               </div>
+             
+              </div>
+
+              <!-- table of information -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title text-info">Assignment Details</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                 
+                {{candidate.content|safe}}
+                  
+                </div>
+                <div class="card-header">
+                  <h3 class="card-title text-info">Submittion Date: {{candidate.submission_date|date}} </h3> 
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+         
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+
+        {% endfor %}
+        
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>

@@ -1,0 +1,56 @@
+{% extends 'admin/base_template.html' %}
+
+
+{% block title %}
+{% if title %}
+{{title}}
+{% else %}
+Password Resender
+{% endif %}
+{% endblock title %}
+  
+
+{% block content %}
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Password Resender</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Password Resender</a></li>
+              <li class="breadcrumb-item active">Management</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row ">
+            
+           
+           
+    <div class="col-sm card" id="formSection">
+    
+      <div class="col-sm-12 card" id="filterForm">
+        <p class="alert text-cent" id="message"></p>
+        <input type="text" name="name" id="" placeholder="Please enter name here to find user easily :)" hx-post="{% url 'adminhod:password-store' %}" hx-target="#tableContent" hx-trigger="keyup change">
+      
+        </div>
+      </div>
+
+      <div class="col-sm-12" id="tableContent">
+        {% include 'passwordResender/table.html' %}
+      </div>
+    </div>
+  </section>
+</div>
+  
+
+
+{% endblock content %}

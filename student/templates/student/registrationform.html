@@ -1,0 +1,124 @@
+
+{% extends 'admin/base_template.html' %}
+
+
+{% block title %}
+{% if title %}
+{{title}}
+{% else %}
+
+Register Student
+{% endif %}
+{% endblock title %}
+  
+
+{% block content %}
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>
+              {% if s_title %}
+              {{s_title}}
+              {% else %}
+              Register Student</h1>
+              {% endif %}
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Student</a></li>
+              <li class="breadcrumb-item active"> {% if s_title %}
+              {{s_title}}
+              {% else %}
+              Register</h1>
+              {% endif %}</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content" id='main-content'>
+      <div class="container-fluid">
+        <div class="row ">
+          <div class="col-sm card">
+           
+
+            <form action="" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+                <div class="card-body row ">
+                
+                {% for field in form %}
+                  
+                    {% if field.name == 'profile_picture' %}
+                        <div class="form-group col-sm-4">
+                    <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                      {{field}}
+                        <label class="custom-file-label" for="exampleInputFile"
+                          >Choose file</label
+                        >
+                      
+                      </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text">Upload</span>
+                      </div>
+
+                    </div>
+                    <label for="exampleInputEmail1">{{field.help_text}}</label>
+                        </div>
+                    
+                    {% elif field.name == 'password1' or field.name == 'password2' %}
+                      
+                    {% else %}
+                      <div class="form-group col-sm-4">
+                        <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                        {{field}}
+                        <label class="text-info" for="exampleInputEmail1">{{field.help_text}} </label>
+                        
+                      </div>
+                    {% endif %}
+                  
+                {% endfor %}
+              
+                <div class="form-check col-sm-6 d-flex align-items-center">
+                   
+                  {% if s_title %}
+                  <button type="submit" class="btn btn-info ml-5">Update Student</button>
+                  {% else %}
+                  <button type="submit" class="btn btn-info ml-5">Add Student</button>
+                  {% endif %}
+                
+                </div>
+                
+                </div>
+                
+            </form>
+          </div>
+
+          <div class="col-sm-3">
+            <h4 class="text-center text-info">currently added</h>
+            
+            {% for message in messages %}
+            <p class="text-success text-center">{{message}}</p>
+              
+            {% endfor %}
+            <p class="h4"><span class='pl-3'>ID.</span> Name</p>
+            {% for student in students %}
+            <a  href=" {% url 'student:edit-student' student.admin.id student.id %} " class="text-dark text-justify nav-link"> <span class='pl-3'>{{student.admin.id}}.</span> {{student.admin}}</a>
+              
+            {% endfor %}
+
+
+              
+          </div>
+        </div>
+      </div>
+    <section>
+  <div>
+
+
+{% endblock content %}

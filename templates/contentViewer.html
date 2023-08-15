@@ -1,0 +1,73 @@
+
+
+{% extends 'base1.html' %}
+
+{% block title %}
+
+{% if bookobj %}
+    Book details
+{% else %}
+Past Quesstions
+{% endif %}
+    
+{% endblock title %}
+
+{% block banner %}{% endblock banner %}
+
+{% block content %}
+
+<div class="container-fluid mt-5"  id="main-content" style="min-height: 2680.06px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>
+                {% if bookobj %}
+    Book details
+{% else %}
+Past Quesstion paper details 
+{% endif %}
+            </h1>
+          </div>
+          <div class="col-sm-6">
+           
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+   
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary">
+                   {{book.book}}
+                    <div class="card-body">
+                        <div class="row">
+                            
+                            {% if bookobj %}
+                            <embed ype="doc/pdf" src="{{book.book.url}}" class="img-fluid" style="width: 100vw; height:100vh;">
+                            {% else %}
+                                <embed src="{{book.paper.url}}" class="img-fluid" style="width: 100vw; height:100vh;">
+                            {% endif %}
+                                
+                           
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+</section>
+    <!-- /.content -->
+  </div>
+
+{% endblock content %}
+

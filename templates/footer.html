@@ -1,0 +1,30 @@
+
+{% load static %}
+
+
+<footer class="main1-footer text-light"  style="background-image: url('{% static 'dist/img/photo1.png'%}') ; background-size:cover;background-repeat:no-repeat;background-position:center;height:auto; padding:00px">
+
+      <div class="text-light d-flex align-items-center justify-content-between  pb-4 ">
+       
+        <!-- To the right -->
+        
+        
+          <div class="bg-dark col-sm-12 row  ">
+             {% for info in schoolinfo %}
+            <div class="col-sm-3 "> <li class="fa fa-home" ></li> {{info.po_box}}  {{info.region}}</div>
+            <div class="col-sm-3 "> <li class="fa fa-home" ></li> {{info.address}}</div>
+            <div class="col-sm-3 text-waring "> <li class="fa fa-inbox" ></li> {{info.email|urlize }}</div>
+        
+            <div class="col-sm-3 "> <li class="fas fa-phone" ></li> {{info.whatsApp|phone2numeric }}</div>
+            {% endfor %}
+          </div>
+      
+      </div>
+      <!-- Default to the left -->
+      <div class="bg-inf flex-basis-30 mt-5 pt-5 pb-3">
+        <strong class="text-light">Copyright ©
+          <script> let date = new Date(); document.write(date.getFullYear()) </script> <a href="#">A.M-CWM-SMS</a>.
+        </strong> All rights reserved.
+      </div>
+  </footer>
+  

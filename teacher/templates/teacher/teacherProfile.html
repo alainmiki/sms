@@ -1,0 +1,139 @@
+{% extends 'base1.html' %}
+
+{% block title %}
+{{request.user.username}} Profile
+{% endblock title %}
+
+
+{% block navbar %}
+{% if request.user.user_type == '3' %}
+
+{% include 'student/base_nav.html' %}
+{% elif request.user.user_type == '4' %}
+
+{% include 'guardian/base_nav.html' %}
+{% elif request.user.user_type == '2' %}
+{% include 'teacher/base_nav.html' %}
+{% endif %}
+{% endblock navbar %}
+
+{% block banner %}
+
+{% include 'teacher/header.html' %}
+{% endblock banner %}
+
+
+{% block content %}
+<div class="" id="main-content">
+
+    <!-- <div class="container">
+
+        {% for nf in notify %}
+        <p> {{nf.message}}</p>
+        {% endfor %}
+
+    </div> -->
+    <div class="row" id='main-content'>
+        <div class="col-12 h3 text-center bg-info">Your Blogs Will Show Below</div>
+        {% for post in request.user.blogpost_set.all %}
+        <div class="col-md-12">
+            <!-- Box Comment -->
+            <div class="card card-widget">
+                <div class="card-header">
+                    <div class="user-block">
+                        <img class="img-circle" src="{{post.user.profile_picture.url}}" alt="User Image">
+                        <span class="username"><a href="#">{{post.user.username|title}}</a></span>
+                        <span class="description">Shared publicly - {{post.pub_date|timesince}}</span>
+                    </div>
+                    <!-- /.user-block -->
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" title="Mark as read">
+                            <i class="far fa-circle"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <!-- /.card-tools -->
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <p>{{post.content|safe|truncatewords:87|linebreaks|center:"15" }} </p>
+
+
+                </div>
+                <div>
+                    <a href="{% url 'blog:blog_post_details' post.id %} "><button class="btn btn-default btn-sm"><i
+                                class="fa fa-angle-double-down "></i>Read More<i
+                                class="fa fa-angle-double-down "></i></button>
+                        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button>
+
+                        <a href="{% url 'blog:likes' post.id %} "><button class="bbtn btn-default btn-sm"><i
+                                    class="far  fa-thumbs-up" aria-hidden="true"></i> Like</button></a>
+
+                        <a href=" {%url 'blog:comments' post.pk %} "><button class="btn btn-default btn-sm"><i
+                                    class="far fa-comment" aria-hidden="true"></i></button></a>
+
+                        <!-- <a class="btn btn-default btn-sm " href="{{post.file.url}}" download="{{post.title}}"><i class="fa fa-download" aria-hidden="true"></i> Save</a> -->
+
+                        <span class="float-right text-muted">{{post.like_set.count}} likes - {{post.comment_set.count}}
+                            comments</span>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer card-comments" style='height:20vh;overflow-y: scroll'>
+                    {% for comment in post.comment_set.all %}
+                    <div class="card-comment">
+                        <!-- User image -->
+                        <img class="img-circle img-sm" src="{{comment.user.profile_picture.url}}" alt="User Image">
+
+                        <div class="comment-text">
+                            <span class="username">
+                                {{comment.user.username}}
+                                <span class="text-muted float-right">{{comment.create_date|timesince}}</span>
+                            </span><!-- /.username -->
+                            {{comment.text}}
+                        </div>
+                        <a href="{% url 'blog:likescomments' comment.id %} "><button class="bbtn btn-default btn-sm"><i
+                                    class="far  fa-thumbs-up" aria-hidden="true"></i> Like</button></a>
+
+                        <a href=" {%url 'blog:replycomments' comment.pk %} "><button class="btn btn-default btn-sm"><i
+                                    class="far fa-comment" aria-hidden="true"></i></button></a>
+
+                        <span class="float-right text-muted">{{comment.likecomment_set.count}} likes -
+                            {{comment.replycomment_set.count}} comments</span>
+
+
+                        <!-- /.comment-text -->
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+                <!-- /.card-footer -->
+                <div class="card-footer">
+                    <form action="{% url 'blog:comments' post.id %}" method="post">
+                        {% csrf_token %}
+                        <img class="img-fluid img-circle img-sm" src="{{request.user.profile_picture.url}}"
+                            alt="Alt Text">
+                        <!-- .img-push is used to add margin to elements next to floating images -->
+                        <div class="img-push d-flex">
+                            <input type="text" class="form-control form-control-sm" name="text"
+                                placeholder="Press enter to post comment">
+                            <input type="submit" class="btn btn-default btn-sm bg-success" value="submit">
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card-footer -->
+            </div>
+            <!-- /.card -->
+        </div>
+        {%endfor%}
+        <!-- /.col -->
+
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,70 @@
+
+{% extends 'base1.html' %}
+
+{% block title %}
+Online Fees Payment
+{% endblock title %}
+
+{% block banner %}{% endblock banner %}
+
+{% block content %}
+
+<div class="container-fluid mt-5"  id="main-content" style="min-height: 2680.06px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Online Fees Payment</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">Fees</li>
+              <li class="breadcrumb-item">Payment</li>
+             
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content" >
+      <div class="container-fluid">
+        <div class="row" >
+         
+            <div class="container-md col-sm-12 row mb-3">
+                <p class="col-sm-8">
+                    Hi welcome to our online fees payment service!.
+                    If you are a parent/guardian enter your <mark class="bg-info text-warning ">child unique school ID or his/her full name as it is in school </mark>. 
+                    If you are a Student enter your <mark class="bg-info text-warning ">unique school ID or your full name as it is in school </mark>. 
+                    A form will appear bellow fill in the form and submit after submitting <span class="bg-warning text-info">confirm the MTN MOMO transaction on your phone by dialing *126# then enter your momo pin </span>.
+                    NOTE: Make sure the amount you enter is in your momo account and also make that sure when confirming  the amount you see should be the amount you entered into the form. 
+                    <span class="text-danger">Make sure you type all the full name or unique ID</span>
+                </p>
+                <div class="col-sm-4 bg-dark ">
+                    <h4 class="text-center bg-info text-secondary">Enter Here</h4>
+                    <form class="p-3" action="">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <input class="form-control" type="text" name="ID" id="id" placeholder="Enter Unique ID or Full Name"
+                            hx-post="/show-fee-form" hx-target="#feeForm" hx-trigger="keyup change delay:1s">
+                    </form>
+                </div>
+            </div>
+        
+            <div class=" col-sm-12 container-md bg-secondary p-sm-5" id="feeForm"></div>
+            <!-- display  receipt here -->
+           
+
+        </div>
+      </div>
+      {% comment %} <div class="container m-4" hx-get="/news" hx-trigger="sse:message"></div> {% endcomment %}
+      <div class="container m-4" id="receipts"></div>
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% endblock content %}
+
+

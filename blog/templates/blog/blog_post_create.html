@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Create Blog
+{% endblock title %}
+
+
+{% block content %}
+
+
+
+    <div class='container-md ' style="color:white; background:radial-gradient(rgba(0, 0, 255, 0.74),
+    rgba(1, 36, 1, 0.76),rgba(212, 208, 147, 0.76),rgba(46, 15, 46, 0.733))
+    ;" id='main-content'>
+        <form class="container-md" enctype = "multipart/form-data" action='' method='POST'>
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <input type='submit' value='Post' class='btn  btn-larg btn-success'>
+        </form>
+</div>
+{% endblock content %}

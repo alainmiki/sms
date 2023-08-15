@@ -1,0 +1,20 @@
+
+{% load static %}
+
+<div class="content-wrapper1 pt-5 mt-5">
+            <!-- Widget: user widget style 1 -->
+            <div class="widget-user">
+              <!-- Add the bg color to the header using any of the bg-* classes -->
+              <div class="widget-user-header text-white" style="background: url('{% static 'dist/img/photo1.png'%}') center center;">
+                <h3 class="widget-user-username text-primary text-right">{{request.user.username|title}}</h3>
+                <h5 class="widget-user-desc text-right  text-warning">{{request.user.email}}</h5>
+                <h5 class="widget-user-desc text-right text-info">{{request.user.address}}</h5>
+              </div>
+              <div class="widget-user-image">
+                <img class="img-circle" src="{{request.user.profile_picture.url}}" alt="User Avatar">
+              </div>
+           {% comment %} {% include 'teacher/base_nav.html' %} {% endcomment %}
+            </div>
+            <!-- /.widget-user -->
+          </div>
+

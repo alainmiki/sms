@@ -1,0 +1,175 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+  {% block title %}
+    AdminLTE 3 | Dashboard 45
+  {% endblock title %}
+    </title>
+    <script src="{% static 'htmx/htmx.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.css' %}">
+
+<!-- <script src="{% static 'js/dist/jspdf.umd.min.js'%}"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+{% include 'admin/css.html' %}
+<script src = "{% static 'js/app.js'%}" ></script>
+
+<!-- <script>
+  import { jsPDF } from "{% static 'js/dist/jspdf.umd.min.js'%}";
+  console.log(jsPDF)
+</script> -->
+ 
+</head>
+
+<body class="hold-transition layout-fixed sidebar-closed sidebar-collapse layout-navbar-fixed "hx-sse="connect:{% url 'stream'%}">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="{% static 'dist/img/AdminLTELogo.png'%}" alt="AdminLTELogo" height="60" width="60">
+  </div>
+
+  <!-- Navbar -->
+  
+  {% block navbar %}
+   {% if  request.user.user_type == '3' %}
+    
+    {% include 'student/base_nav.html' %}
+    {% elif request.user.user_type == '2' %}
+    {% include 'teacher/base_nav.html' %}
+    {% elif request.user.user_type == '1' %}
+    {% include 'admin/navbar.html' %}
+    {% elif request.user.user_type == '4' %}
+    {% include 'guardian/base_nav.html' %}
+    {% else %}
+    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white ">
+        <div class="container-fluid">
+        <a href="#" class="navbar-brand">
+            {% comment %} <img src="{% static 'dist/img/AdminLTELogo.png'%}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> {% endcomment %}
+            <span class="brand-text font-weight-light">SMS</span>
+        </a>
+
+        <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                <a href="{% url 'gallery' %}" class="nav-link">
+
+                  Gallery
+                </a>
+                </li>
+           
+                <li class="nav-item">
+                    <a href="{% url 'student:admission' %}" class="nav-link">Find Admission</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'activities' %} " class="nav-link">Extra Curicular Activities</a>
+                </li>
+                 <li class="nav-item">
+                  <a href="{% url 'fees-pay-online' %}" class="nav-link">Fees Pay</a>
+                </li>
+                 <li class="nav-item">
+            <a href="{% url 'events' %}" class="nav-link">Events</a>
+          </li>
+
+                <li class="nav-item">
+                    <a href="{% url 'adminhod:login' %} " class="nav-link">Login</a>
+                </li>
+                {% comment %} <li class="nav-item">
+                    <a href="#" class="nav-link">Contact</a>
+                </li> {% endcomment %}
+     
+            </ul>
+
+        </div>
+
+        <!-- Right navbar links -->
+        <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+           
+            <li class="nav-item">
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                <i class="fas fa-th-large"></i>
+            </a>
+            </li>
+        </ul>
+        </div>
+    </nav>
+
+    {% endif %}
+    
+  {% endblock navbar %}
+
+  {% if request.user.is_authenticated %}
+    {% block banner %}
+      {% include 'teacher/header.html' %}
+    {% endblock banner %}
+  {% endif %}
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  
+  {% block sidbar %}
+    
+    {% comment %} {% include 'profilesSidebar.html' %} {% endcomment %}
+  {% endblock sidbar %}
+    
+
+  <!-- Content Wrapper. Contains page content -->
+  
+
+  {% block content %}
+  
+  <!-- {% include 'admin/home.html' %} -->
+ 
+    
+  {% endblock content %}
+    <!-- <div id="'test">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt corporis earum obcaecati, quo similique ut unde laudantium tempore inventore aliquid commodi alias fuga dolores, sint placeat esse rem. Consectetur, rem.</p>
+    </div>
+    <button onclick="generatePDF()">download</button> -->
+  <!-- /.content-wrapper -->
+  <!-- footer section -->
+  {% include 'footer.html' %}
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+{% include 'admin/scripts.html' %}
+<
+<script>
+  document.body.addEventListener('htmx:configRequest',(event)=>{
+    event.detail.headers['X-CSRFToken']= '{{ csrf_token }}'
+  })
+</script>
+<script>
+  {% comment %} let evst=new EventSource("{% url 'stream'%}")
+  evst.onopen=function(e){
+    console.log(e)
+  }
+  evst.onmessage=function(e){
+    console.log(e)
+  }
+  evst.onerror=function(e){
+    console.log(e)
+  }  {% endcomment %}
+</script>
+
+<!-- <script src="{% static 'js/dist/jspdf.es.min.js'%}"></script> -->
+
+
+</body>
+</html>

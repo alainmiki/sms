@@ -1,0 +1,53 @@
+{% extends 'base1.html' %}
+
+
+{% block title %}
+{% if title %}
+{{title}}
+{% else %}
+Student Marks Management
+{% endif %}
+{% endblock title %}
+  
+
+{% block content %}
+ <div class="container-fluid">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Student Marks Management</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Student Marks Management</a></li>
+              <li class="breadcrumb-item active">Management</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row ">
+              {% comment %} <span hx-get="{% url 'fees:clear' %}" hx-trigger='every 70s' hx-target="#formSection">clear Form</span> {% endcomment %}
+    <div class="col-sm card" id="formSection">
+    
+      </div>
+    <div class="col-sm-12 card" id="filterForm">
+      {% include 'marks/marksFilterForm.html' %}
+    
+      </div>
+
+      <div class="col-sm-12" id="tableContent">
+        {% include 'marks/marksTable.html' %}
+      </div>
+    </div>
+  </section>
+</div>
+  
+
+
+{% endblock content %}

@@ -1,0 +1,79 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> {% block title %}
+        Document
+    {% endblock title %}
+</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  {% comment %} <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css'%}"> {% endcomment %}
+   <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.css' %}">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css'%}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css'%}">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <!-- /.login-logo -->
+
+
+  
+    <!-- load and link bootstrap5 -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+<!-- linking style sheet -->
+<link rel="stylesheet" href="{% static 'style.css'%}">
+
+
+
+
+<body>
+
+  {% block navbar %}
+     {% if  request.user.user_type == '3' %}
+    
+    {% include 'student/base_nav.html' %}
+    {% elif request.user.user_type == '2' %}
+    {% include 'teacher/base_nav.html' %}
+    {% endif %}
+  {% endblock navbar %}
+
+    {% block banner %}
+      
+    {% endblock banner %}
+
+    {% block content %}
+    
+        
+    {% endblock content %}
+
+    <div class="col-sm-12 mt-5">
+
+      {% include 'footer.html' %}
+    </div>
+
+        
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'htmx/htmx.min.js' %}"></script>
+
+
+        <!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js'%}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js'%}"></script>
+
+
+    
+</body>
+</html>

@@ -1,0 +1,82 @@
+{% extends 'admin/base_template.html' %}
+
+
+{% block title %}
+    {{request.user|title}} Cartificate
+{% endblock title %}
+
+{% comment %} 
+{% block sidebar %}
+    
+{% endblock sidebar %}
+     {% endcomment %}
+
+{% block content %}
+    <div class="content-wrapper">
+         <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Trimester Certificate</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Certificate</a></li>
+                    <li class="breadcrumb-item active">Management</li>
+                    </ol>
+                </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="card">
+                {% include "certificate/certificateFilterForm.html" %}
+            </div>
+            <div class="container-fluid" id="certificates">
+                {% comment %} {% include 'certificate/content.html' %} {% endcomment %}
+            </div>
+            <button id="back-to-top" onclick="createPDF()" class="btn btn-primary back-to-top" role="button"
+                aria-label="Scroll to top">
+                <i class="fas fa-chevron-up">print/save Certificates </i>
+            </button>
+        </section>
+    </div>
+
+
+
+
+    <script>
+        function createPDF() {
+            var sTable = document.getElementById('certificates').innerHTML;
+
+            var style = "<style>";
+            style = style + "table {width: 100%;font: 17px Calibri;}";
+            style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+            style = style + "padding: 2px 3px;text-align: center;}";
+            style = style + "</style>";
+
+            // CREATE A WINDOW OBJECT.
+            var win = window.open('', '', 'height=700,width=700');
+
+            win.document.write('<html><head>');
+            win.document.write('<title>{{fee.student_id.username}}</title>');   // <title> FOR PDF HEADER.
+            win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+            win.document.write('</head>');
+            win.document.write('<header>');
+            win.document.write('<body>');
+            win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+            win.document.write('</body></html>');
+
+            win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+            win.print();    // PRINT THE CONTENTS.
+        }
+
+
+
+    </script>
+{% endblock content %}
+    
+    

@@ -1,0 +1,455 @@
+{% load static %}
+
+ <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+      <img src="{% static 'dist/img/AdminLTELogo.png'%}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Administrative Staff</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{{request.user.profile_picture.url}}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">{{request.user.username}}</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+           <li class="nav-item">
+            <a href="{% url 'school_info:setup' %}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Set or Update School Information
+                <span class="right badge badge-danger">Info</span>
+              </p>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a href="{% url 'school_info:create-activity' %}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Set or Update School Activities
+                <span class="right badge badge-danger">SA</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'admission-approve' %}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Approve Admissions
+                <span class="right badge badge-danger">AMA</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'student:student-government' %}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Student Government
+                <span class="right badge badge-danger">SG</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'teacher:staff-daily-attendance' %}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Take Staff Attendance
+                <span class="right badge badge-danger">TSA</span>
+              </p>
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="{% url 'adminhod:student-id-card' %}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Generate ID Cards
+                <span class="right badge badge-danger ml-2">GIC</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'adminhod:password-store' %}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Password Resender
+                <span class="right badge badge-danger ml-2">PR</span>
+              </p>
+            </a>
+          </li>
+
+           <li class="nav-item">
+            <a href="{% url 'timetable:period-reg' %}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Set Timetable Periods
+                <span class="right badge badge-danger ml-2">STP</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{% url 'timetable:timetable-reg' %}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Set Timetable Staffs
+                <span class="right badge badge-danger ml-2">STS</span>
+              </p>
+            </a>
+          </li>
+          {% comment %} timetable {% endcomment %}
+          <li class="nav-item">
+            <a href="{% url 'timetable:output-timetables' %}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Manage Timetable
+                <span class="right badge badge-danger ml-2">MT</span>
+              </p>
+            </a>
+          </li>
+          {% comment %} REPORT card {% endcomment %}
+          <li class="nav-item">
+            <a href="{% url 'marks:report-card' %}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                Report Cards
+                <span class="right badge badge-danger ml-2">RPC</span>
+              </p>
+            </a>
+          </li>
+         
+          {% comment %} Certificates{% endcomment %}
+          <li class="nav-item">
+            <a href="{% url 'certificate' %}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+               Certificates Management
+                <span class="right badge badge-danger ml-2">CM</span>
+              </p>
+            </a>
+          </li>
+         
+
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                 Administrators
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <a href="{% url 'adminhod:register-admin' %}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add / Manage Administrator</p>
+                </a>
+              </li>
+
+              
+            </ul>
+          </li>
+
+          
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+               Staffs
+                <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href=" {% url 'teacher:register' %} " class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Add Staff</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'teacher:manage-staffs' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Manage Staff</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{% url 'teacher:notify-staff' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Send Single Staff Notification</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'teacher:notify-staffs' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Send all Staff Notification</p>
+                </a>
+              </li>
+
+               <li class="nav-item">
+                <a href="{% url 'teacher:manage-staff-leaves' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Manage & Aprove Staffs Permission</p>
+                </a>
+              </li>
+              
+              
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Students
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+               <li class="nav-item">
+                <a href="{% url 'student:register-student' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Add Student</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{% url 'student:manage-student' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Manage Students</p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{% url 'student:notify-student' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Send Single Student Notification</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'student:notify-students' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Send all Student Notification</p>
+                </a>
+              </li>
+
+               <li class="nav-item">
+                <a href="{% url 'student:manage-student-leaves' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Manage & Aprove Students Permission</p>
+                </a>
+              </li>
+              
+               <li class="nav-item">
+                <a href="{% url 'student:add-department' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Add & View Department</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{% url 'student:add-class' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Add & View Classes</p>
+                </a>
+              </li>
+
+
+
+
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-tree"></i>
+              <p>
+               Guardians
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+               <li class="nav-item">
+                <a href="{% url 'guardian:register-guardian' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Add & Manage Guardians</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'guardian:notify-guardian' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Send Single Guardian Notification</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'guardian:notify-guardians' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Send all Guardians Notification</p>
+                </a>
+              </li>
+             
+            </ul>
+          </li>
+      
+           <li class="nav-item">
+                <a href="{% url 'attendance:add-subject' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Add / Manage Subjects</p>
+                </a>
+              </li>
+          
+              <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                School Fee
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+               <li class="nav-item">
+                <a href="{% url 'fees:fees-register' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Add Fee</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{% url 'fees:fees-management' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Manage Fees</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Marks Record
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+               <li class="nav-item">
+                <a href="{% url 'marks:record-marks' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Add Marks Record</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{% url 'marks:manage-marks' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Manage Marks Record</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Library
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+               <li class="nav-item">
+                <a href="{% url 'adminhod:library-create' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Add Book</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{% url 'adminhod:staff-document-create' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Add Staff Documents</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{% url 'adminhod:library-create' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Manage Library</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Events
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+               <li class="nav-item">
+                <a href="{% url 'adminhod:event-register' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Add Event</p>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a href="{% url 'adminhod:events-management' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Manage Events</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Gallery
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+               <li class="nav-item">
+                <a href="{% url 'adminhod:gallery' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Add & Manage Gallery</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+                <a href="{% url 'adminhod:pass_question-create' %}" class="nav-link">
+                  <i class="far fas fa-th nav-icon"></i>
+                  <p>Past Quesstions</p>
+                </a>
+              </li>
+
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>

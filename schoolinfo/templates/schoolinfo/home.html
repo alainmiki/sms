@@ -1,0 +1,299 @@
+
+{% load static %}
+<html lang="en" style="height: auto;"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+
+      {% block title %}
+      home page
+      {% endblock title %}
+    </title>
+{% block navbar %}
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.css'%}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css'%}">
+
+   {% comment %} <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'assets/css/all.min.css'%}"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'assets/css/style.css'%}">
+
+</head>
+<body class="layout-top-nav" style="height: auto;">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  
+  {% endblock navbar %}
+    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+        <div class="container-fluid">
+        <a href="#" class="navbar-brand">
+            <img src="{% static 'dist/img/AdminLTELogo.png'%}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">SMS</span>
+        </a>
+
+        <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                <a href="{% url 'gallery' %}" class="nav-link">
+
+                  Gallery
+                </a>
+                </li>
+           
+                <li class="nav-item">
+                    <a href="{% url 'student:admission' %}" class="nav-link">Find Admission</a>
+                </li>
+                 <li class="nav-item">
+                     <li class="nav-item">
+            <a href="{% url 'events' %}" class="nav-link">Events</a>
+          </li>
+
+                    <a href="{% url 'fees-pay-online' %}" class="nav-link">Fees Pay</a>
+                </li>
+                 <li class="nav-item">
+                    <a href="{% url 'activities' %}" class="nav-link">Extra Curicular Activities</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'adminhod:login' %} " class="nav-link">Login</a>
+                </li>
+              
+            </ul>
+
+        </div>
+
+        <!-- Right navbar links -->
+        <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+           
+            <li class="nav-item">
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                <i class="fas fa-th-large"></i>
+            </a>
+            </li>
+        </ul>
+        </div>
+    </nav>
+
+    
+    <!-- /.navbar -->
+    {% block banner %}
+
+      <!-- ================**Banner Section**================ -->
+
+    <section class="banner bg-dark">
+        <div class="banner-wrapper-main" style="background-image: url('{{info.school_banner_image.url}}') ; background-size:cover;background-repeat:no-repeat;"></div>
+        <div class="container-fluid">
+                <div class="row">
+                    <div class="slider-wrapper" >
+                        <div class=" box-01 col-sm-4"  >
+                            <div class="content">
+                                 <h1 class="text-center text-success ">{{info.school_name_abbreviation}}</h1>
+                                <h2 class="text-center h1 text-danger pt-5">Welcome To {{info.school_name_full|title}} School Management System</h3>
+                                <h3 class="text-center text-warning">{{info.motto|title}}</h2>
+
+                                <div class="btn-001 text-center">
+                                    <ul>
+                                        <li><a href="{% url 'student:admission' %}">FIND ADMINSION</a></li>
+                                        <li><a class="text-light bg-info" href="{% url 'adminhod:login' %} ">LOGIN</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% if info.school_banner_image %}
+                        <div class="box-01" >
+                            <div class="slider-image" >
+                                {% comment %} <img src="{{info.school_banner_image.url}}"> {% endcomment %}
+                  
+                  <div class="col-sm-8" >
+                </div>
+                {% else %}
+
+     
+                <div class="col-7" style="background-image: url('{% static 'dist/img/photo2.png'%}') ; background-size:cover;background-repeat:no-repeat;background-position:bottom">
+                </div>
+                 {% endif %}
+                      <!-- <p class="col-sm-12 text-justify ">{{info.history|safe}}</p> -->
+                     
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    </section>
+<div class="bg-dark col-12 row  text-center ">
+                <div class="col-sm-2 "> <a href="#" class="btn btn-sm btn-info"> <li class="fa fa-home" ></li> {{info.address}} </a></div>
+
+        <div class="col-sm-3  "> <a href="#" class="btn btn-sm btn-info"> <li class=" fa fa-inbox" ></li> {{info.email|urlize }} </a></div>
+
+        <div class="col-sm-2  "> <a href="#" class="btn btn-sm btn-info"> <li class=" fa fa-home" ></li> {{info.website|urlize }} </a></div>
+        <div class="col-sm-2  "> <a href="#" class="btn btn-sm btn-info"> <li class=" fa fa-phone" ></li> {{info.phone|urlize }} </a></div>
+        <div class="col-sm-2  "> <a href="#" class="btn btn-sm btn-info"> <li class=" fa fa-phone" ></li> {{info.whatsApp|phone2numeric }} </a></div>
+    </div>
+
+    {% comment %} <header class= "text-light text-center">
+
+     {% for info in schoolinfo %}
+     
+     
+     <div class="row" >
+    
+            
+             <!-- <div class="col-sm-2">
+                 <img class="img-fluid" src="{{info.school_logo.url}}"width= 100 alt="school logo" srcset="">
+             </div> -->
+             <div class="col-sm-12  text-center row ">
+                 <div class="col-sm-4 bg-dark">
+                     <h1 class="text-center text-success ">{{info.school_name_abbreviation}}</h1>
+                     <h1 class="text-center text-danger pt-5">Welcome To {{info.school_name_full|title}} School Management System</h1>
+                     <h3 class="text-center text-warning">{{info.motto|title}}</h3>
+                 </div>
+                 
+                  {% if info.school_banner_image %}
+                  
+                  <div class="col-sm-8" style="background-image: url('{{info.school_banner_image.url}}') ; background-size:cover;background-repeat:no-repeat;background-position:center">
+                {% else %}
+
+     
+                <div class="col-7" style="background-image: url('{% static 'dist/img/photo2.png'%}') ; background-size:cover;background-repeat:no-repeat;background-position:bottom">
+                 {% endif %}
+                      <!-- <p class="col-sm-12 text-justify ">{{info.history|safe}}</p> -->
+                     
+                  </div>
+             </div>
+       
+           <div class="bg-dark col-12 row  ">
+            <div class="col-sm-2 "> <li class="fa fa-home" ></li> {{info.address}}</div>
+            <div class="col-sm-3 "> <li class="fa fa-inbox" ></li> {{info.email|urlize }}</div>
+            <div class="col-sm-2 "> <li class="fa fa-home" ></li> {{info.website|urlize }}</div>
+            <div class="col-sm-2 "> <li class="fa fa-phone" ></li> {{info.phone|urlize }}</div>
+            <div class="col-sm-2 "> <li class="fa fa-phone" ></li> {{info.whatsApp|phone2numeric }}</div>
+        </div>
+        {% endfor %}
+    </header>  {% endcomment %}
+
+{% endblock banner %}
+
+
+  <!-- Content Wrapper. Contains page content -->
+{% block content %}
+
+
+<!-- ================**Category Section**================ -->
+
+    <section class="bg-01">
+        <div class="container">
+            <div class="row">
+                <div class="heading">
+                    <h2>Extra Curicular Activities</h2>
+                    <span></span>
+                </div>
+                
+                {% for activity in activities %}
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="category-box">
+                        <div class="my-card">
+                            <ul>
+                                <li>
+                                    <img src="assets/images/icons/design.png">
+                                    <h3>{{activity.name|upper}}</h3>
+                                    <p>{{activity.description|truncatewords:11}}</p>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                    
+
+            </div>
+        </div>
+    </section>
+
+ 
+ <!-- ================**about school Section**================ -->
+{% comment %} history of the school {% endcomment %}
+  <section class="bg-02">
+      <div class="container-fluid pl-sm-5">
+          <div class="row">
+              <div class="col-lg-8 col-md-8 col-12">
+                  <div class="cal-box">
+                      <p class="blockquote ">{{info.history|safe}}</p>
+                            
+                  </div>
+              </div>
+
+              <div class="col-lg-4 col-md-4 col-12">
+                <div class="cal-box">
+                    <img src="{{info.school_logo.url}}">
+                </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  {% comment %} school Description {% endcomment %}
+  <section class="bg-02">
+      <div class="container-fluid pr-sm-5">
+          <div class="row">
+
+            <div class="col-lg-4 col-md-4 col-12">
+                <div class="cal-box">
+                    <img src="{% static 'assets/images/slider/2.png'%}">
+                </div>
+              </div>
+
+
+              <div class="col-lg-8 col-md-8 col-12">
+                  <div class="cal-box">
+                      <p class="blockquote ">{{info.description|safe}}</p>
+                            
+                  </div>
+              </div>
+
+              
+          </div>
+      </div>
+  </section>
+
+
+
+{% endblock content %}
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark" style="display: none;">
+    <!-- Control sidebar content goes here -->
+  <div class="p-3 control-sidebar-content" style=""><h5>Customize SMS</h5></aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  {% include "footer.html" %}
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js'%}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js'%}"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{% static 'dist/js/demo.js'%}"></script>
+
+
+</body></html>
+
+
+
+

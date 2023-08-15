@@ -1,0 +1,63 @@
+
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}
+post detail
+{% endblock title %}
+
+{% block content %}
+  
+
+
+        
+        <div class="col-lg-12" id='main-content'>
+       
+          <div class="user-block ">
+                  <img class="img-circle" src="{{detail.user.profile_picture.url}}" alt="User Image">
+                  <span class="username"><a href="#">{{detail.user.username|title}}</a></span>
+                  <span class="description">Shared publicly - {{detail.pub_date|timesince}}</span>
+          </div>
+       
+              <!-- /.card-header -->
+              <br/>
+              <div class="card-body">
+                <p>{{detail.content|safe|linebreaks|center:"15" }} </p>
+
+              
+              </div>
+  
+   
+     <div class="card-footer">
+                  {% comment %} <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button> {% endcomment %}
+
+                 <a href="{% url 'blog:likes' detail.id %} "><button class="btn btn-default btn-sm"><i class="far  fa-thumbs-up" aria-hidden="true"></i>  Like</button></a>
+
+              <a href=" {%url 'blog:comments' detail.pk %} "><button class="btn btn-default btn-sm"><i class="far fa-comment" aria-hidden="true"></i>Comment</button></a>
+
+              {% if request.user == detail.user %}
+                <a href=" {% url 'blog:blog_post_update' detail.id %} "class="btn btn-sm btn-success"> <li class="fa fa-edit" >update</li> </a>
+                <a href=" {% url 'blog:blog_post_delete' detail.id %} "class="btn btn-sm btn-danger"> <li class="fa fa-trash" >delete</li> </a>
+                {% endif %}
+
+                <span class="float-right text-muted">{{detail.like_set.count}} likes - {{detail.comment_set.count}} comments</span>
+          </div>
+
+    </div>
+        </div>
+            
+      </div>
+   
+   
+    
+
+
+
+    
+    </div>
+
+
+{% endblock content %}
+
+
+
+

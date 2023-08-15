@@ -1,0 +1,89 @@
+{% extends 'admin/base_template.html' %}
+
+{% block title %}
+update Fee information of student
+{% endblock title %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>School Fees Payment  update</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">School Fees Payment update</a></li>
+              <li class="breadcrumb-item active">Paying update</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row ">
+    <div class="col-sm card" id="formSection">
+    
+
+
+      <form action="" method="post">
+            
+            {% csrf_token %}
+          <div class="card-body row ">
+            <div class="col-sm-12"  id="new">
+              
+            </div>
+          
+          {% for field in form %}
+                {% if field.name == "description" %}
+                <div class="form-group col-sm-12">
+                  <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field}}
+                  
+                  <label class="text-info" for="exampleInputEmail1">{{field.help_text}} </label>
+                  
+                {% else %}
+                <div class="form-group col-sm-4">
+                  <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field|safe}}
+                  <label class="text-info" for="exampleInputEmail1">{{field.help_text}}  </label>
+                  
+                
+                {% endif %}
+                
+                
+                </div>
+             
+            
+          {% endfor %}
+
+          {% for error in form.errors %}
+          <p class="text-danger text-center">{{error}}</p>
+          {% endfor %}
+         
+          <div class="form-group col-sm-12 ">
+            
+              <button type="submit" hx-target="#tableContent" hx-post="{% url 'fees:fees-update' receipt_no %}" class="btn float-right btn-info ">Submit</button>
+          
+          </div>
+           
+          </div>
+
+          
+          
+      </form>
+
+
+      </div>
+
+      <div class="col-sm-12" id="tableContent">
+        {% include 'fees/feeTable.html' %}
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock content %}

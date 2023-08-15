@@ -1,0 +1,10 @@
+body{
+    margin: 0;
+    -webkit-font-feature-settings: on;
+}
+
+.c{
+    overflow-y: scroll;
+    /* border-image-source: url();
+    border-image-outset: 10px; */
+}

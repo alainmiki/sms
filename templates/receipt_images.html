@@ -1,0 +1,236 @@
+
+<!-- 
+<p class="text-center p-2 m-sm-3 text-warning"> Download your receipt here if you don't see the current payment receipt then enter the name after you confirm the transaction and the receipt will be available</p>
+
+<div class="container row m-sm-3 ">
+        
+    {% for receipt in receipts %}
+        <div class="col-sm-4">
+        <img src="{{receipt.image.url}}" alt="" class="img-fluid image-fluid">
+        {{receipt.counter}}
+        <a href="{{receipt.image.url}}" download="" class="btn btn-default btn-sm m-2 rounded text-info">download</a>
+        </div>
+    {% endfor %}
+
+    
+    
+    <button class="btn-default btn-sm btn-none" onclick="printp()">print</button>
+</div> -->
+
+
+<div class="container row m-sm-3">
+    
+   
+        
+</div>
+<div class="container" style="width: 100%;" >
+    
+<div class="container" style="width: 100%;" id="tab">
+    <!-- header section -->
+    <div style=" display: flex; justify-content:left; background: ggray; width: 95vw; margin-bottom: 15px">
+        <div
+            style="background: url('{{school_info.school_logo}}'); width: 13%;  height: 15vh;background-position: right; background-size: cover;">
+            <!-- <img src="j.pn1g" width="100%"> -->
+            <div
+                style="background: url('{{school_info.school_logo.url}}'); width: 93%; height: 15vh; background-position: right; background-size: cover;">
+                <!-- <img src="j.pn1g" width="100%"> -->
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: right; width: 100%">
+            <div style="text-align: center; background: grey; width: 80%">
+                <h1 style="margin-left: 3px; color: green;text-align: center;">{{school_info.school_name_full|title}} </h1>
+
+                <h2 style="color: red; text-align:center">{{school_info.po_box|upper}}</h2>
+                <h3 style="color: gold; text-align: center;">School Fee Receipt</h3>
+            </div>
+            <div style="text-align: center; background: 23; width: 20%">
+                <div style="background: linear-gradient(rgba(65, 104, 65, 0.438), rgba(255, 0, 0, 0.548), rgba(255, 0, 0, 0.336), rgba(255, 255, 0, 0.144)) ;color:blue">
+                    <h3>School Informations</h3>
+                    <em>website:{{school_info.website}}</em>
+                    <em>phone:{{school_info.phone}}</em>
+                    <em>location:{{school_info.address}}</em>
+                    <em>whatsApp:{{school_info.whatsApp}}</em>
+                    <!-- <em>Facebook:GBHS Mambanda</em> -->
+                    <em>Email: {{school_info.email}}</li>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div style="display: flex;justify-content: space-between;width: 100%;">
+        <div>
+            <th> Paid Date: <span style="text-align: center;color: blue">{{fee.date_paid}}</span> </th>
+        </div>
+        <div>
+            <th>Receipt No: <span style="text-align: center;color: blue"> {{fee.receipt_no}}</span></th>
+        </div>
+    </div>
+    <hr>
+    <div style="display: flex;justify-content: space-between;">
+        <div style="background-color: skyblue">
+            <th style="background-color: skyblue"> Student Names: </th>
+        </div>
+        <div>
+            <!-- <th>Receipt No: <span style="text-align: center;color: blue"> 8f7df12/072022</span></th> -->
+        </div>
+        <div>
+            <th style="border: 12px"> {{fee.student_id.admin.username|title}}</th>
+        </div>
+        <div>
+            <!-- <th>Receipt No: <span style="text-align: center;color: blue"> 8f7df12/072022</span></th> -->
+        </div>
+        <div>
+            <!-- <th> Paid Date: <span style="text-align: center;color: blue">12/072022</span> </th> -->
+        </div>
+        <div>
+            <!-- <th>Receipt No: <span style="text-align: center;color: blue"> 8f7df12/072022</span></th> -->
+        </div>
+    </div>
+    <hr>
+
+    <div style="display: flex;justify-content: space-between;">
+        <div>
+            <th> Class: </th>
+        </div>
+        <div>
+            <h4>{{fee.class_id.name|title}}</h4>
+        </div>
+        <div>
+            <th> Trimester: </th>
+        </div>
+        <div>
+            <h4>{{fee.semester}}</h4>
+        </div>
+    </div>
+    <hr>
+
+    <div style="display: flex;justify-content: space-between;">
+        <div>
+            <th> Amaount: </th>
+        </div>
+        <div>
+            <h4>{{fee.amount}}</h4>
+        </div>
+        <div>
+            <th> Total: </th>
+        </div>
+        <div>
+            <h4>{{fee.total_fee}}</h4>
+        </div>
+        <div>
+            <th> Amount In Words: </th>
+        </div>
+        <div>
+            <h4>{{fee.amount_in_words|title}}</h4>
+        </div>
+    </div>
+    <hr>
+
+    <div style="display: flex;justify-content: space-between;">
+        <div>
+            <th> Due/Owing Fee: </th>
+        </div>
+        <div>
+            <!-- <h4>$500,000</h4> -->
+        </div>
+        <div>
+            <h4> {{fee.due_fee}} </h4>
+        </div>
+        <div>
+            <!-- <h4>$1,000000</h4> -->
+        </div>
+        <div>
+            <!-- <th> Amount In Words:  </th> -->
+        </div>
+        <div>
+            <!-- <h4>Five Hundred thousand</h4> -->
+        </div>
+    </div>
+    <hr>
+
+    <div style="display: flex;justify-content: space-between;">
+        <div>
+            <strong> Student Signature: </strong>
+        </div>
+        <div>
+            <strong><s>{{fee.student_id.admin.username|title}}</s></strong>
+        </div>
+        <div>
+            <!-- <h4> $60000 </h4> -->
+        </div>
+        <div>
+            <strong>Prepared By:</strong>
+        </div>
+        <div>
+            <!-- <th> Amount In Words:  </th> -->
+        </div>
+
+        <div>
+            <strong>{{school_info.school_name_abbreviation}} Online Payment Service</strong>
+        </div>
+
+    </div>
+    <hr>
+    <div style="display: flex;justify-content: space-between;">
+        <div>
+            <!-- <th> Due/Owing Fee:  </th> -->
+        </div>
+        <div>
+            <!-- <h4>$500,000</h4> -->
+        </div>
+        <div>
+            <!-- <h4> $60000 </h4> -->
+        </div>
+        <div>
+            <strong>Recipient Signature:</strong>
+        </div>
+        <div>
+            <!-- <th> Amount In Words:  </th> -->
+        </div>
+
+        <div>
+            <strong> <s>{{school_info.school_name_abbreviation}} Online Payment Service</s> </strong>
+        </div>
+
+    </div>
+
+
+</div>
+        
+<div class="d-flex justify-content-center p-5">
+    <button class="btn btn-success btn-md" onclick="createPDF()">Print/Save Receipt</button>
+</div>
+</div>
+
+
+
+<script>
+    function createPDF() {
+        var sTable = document.getElementById('tab').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>{{fee.student_id.username}}</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+
+</script>

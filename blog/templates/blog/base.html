@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %}
+      content
+    {% endblock title %} </title>
+
+  
+ <!-- Plugin CSS -->
+ {% comment %} <link href="{% static 'vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+
+ <!-- Theme CSS - Includes Bootstrap -->
+ <link href="{% static 'css/creative.min.css' %}" rel="stylesheet"> {% endcomment %}
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+    
+  
+       <!-- load and link bootstrap5 -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+<!-- linking style sheet -->
+<link rel="stylesheet" href="{% static 'style.css'%}">
+
+{% comment %} <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}"> {% endcomment %}
+<link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.css' %}">
+
+<link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+  
+</head 
+>
+<body class="hold-transition layout-fixed sidebar-closed sidebar-collapse layout-navbar-fixed " >
+  {% if request.user.user_type == '3' %}
+  {% include "student/base_nav.html" %}
+  {% elif request.user.user_type == '2' %}
+  {% include "teacher/base_nav.html" %}
+  {% else %}
+  {% include "admin/navbar.html" %}
+  {% endif %}
+
+  
+  {% block content %}
+ 
+
+{% endblock content %}
+
+
+  <hr>
+  
+     
+{% include 'footer.html' %}
+<!-- for static plugins  -->
+ 
+
+
+ <script src="{% static 'plugins/jquery/jquery.min.js'%}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js'%}"></script>
+
+</body>
+</html>

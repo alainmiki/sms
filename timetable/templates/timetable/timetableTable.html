@@ -1,0 +1,71 @@
+
+ 
+    <h5 class="text-center text-warning bg-dark p-3"> School Timetable Data</h5>
+    
+    
+    <div>
+    
+        <img src='{{file.url}}'>
+        <div class="card-body">
+            <div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+                <div class="jsgrid-grid-header jsgrid-header-scrollbar">
+                    <table class="jsgrid-table text-center" border=2>
+                        <tr class="jsgrid-header-row">
+    
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 250px;">Teacher Name</th>
+    
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 250px;">Day</th>
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">
+                                class</th>
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">
+                                Subject</th>
+    
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">
+                                Department</th>
+    
+                            {% comment %} <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">
+                                Start Time</th>
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">
+                                End Time</th> {% endcomment %}
+    
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">
+                                Action</th>
+    
+                        </tr>
+                        {% for timetable in timetable_obj %}
+    
+                        <tr class="jsgrid-row">
+                            <td class="jsgrid-cell" style="width: 150px;">{{timetable.staff_id.admin.username}}</td>
+                            <td class="jsgrid-cell" style="width: 150px;">{{timetable.day}}</td>
+                            <td class="jsgrid-cell" style="width: 150px;">{{timetable.class_id.name}}</td>
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">{{timetable.subject_id.name}}
+                            </td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{timetable.department_id.name}}</td>
+                            {% comment %} <td class="jsgrid-cell" style="width: 200px;">{{timetable.start_time}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{timetable.end_time}}</td> {% endcomment %}
+                            <td class="jsgrid-cell" style="width: 200px;">
+                                <a href="{% url 'timetable:timetable-reg' timetable.id %}" hx-target="#formSection"
+                                    class="btn float-right btn-info ">Update</a>
+                            </td>
+    
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="jsgrid-load-panel"
+                    style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please, wait...</div>
+            </div>
+        </div>
+    
+    
+    
+    
+    
+    </div>
+
+
+
+
+
+
+  

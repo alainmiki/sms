@@ -1,0 +1,60 @@
+<h5 class="text-center text-warning bg-dark p-3"> School Administrators List</h5>
+      
+      
+      <div>
+       
+        <div class="card-body">
+          <div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+              <div class="jsgrid-grid-header jsgrid-header-scrollbar">
+                  <table class="jsgrid-table text-center" border=2>
+                      <tr class="jsgrid-header-row">
+                        
+                         <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 250px;">ID</th>
+                         
+                          <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 250px;">Username</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">Email</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Address</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Gender</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Place Of Birth</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">Tel Number</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> User Type</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Post</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> User Department</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 80px;"> Action</th>
+                  
+                        </tr>
+                        {% for admin in admins %}
+                        
+                        <tr class="jsgrid-row">
+                            <td class="jsgrid-cell" style="width: 150px;">{{admin.id}}</td>
+                            <td class="jsgrid-cell" style="width: 150px;">{{admin.admin.username}}</td>
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">{{admin.admin.email}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{admin.admin.address}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{admin.admin.gender}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{admin.admin.place_of_birth}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{admin.admin.phone}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{admin.admin.user_type}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{admin.post}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{admin.user_department}}</td>
+                            
+                            <td class="jsgrid-cell d-flex align-items-space-around justify-content-center" style="width: 80px;">
+                                <a href="{% url 'adminhod:update-admin' admin.admin.id %}" hx-target="#formSection"  class="btn btn-sm  btn-info "> <li class="fa fa-edit"></li> </button>
+                                <a hx-delete="{% url 'adminhod:delete-admin' admin.admin.id %}" hx-target='#tableContent' hx-confirm=" Are you sure you want to delete This user? {{admin.admin.username}}"  class="btn btn-sm btn-danger "> <li class="fa fa-trash"></li> </button>
+                            </td>
+                            
+                        </tr>
+                         {% endfor %}
+                        </table>
+                    </div>
+                    <div class="jsgrid-load-panel" style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please, wait...</div>
+                </div>
+        </div>
+        
+     
+
+
+        
+    </div>

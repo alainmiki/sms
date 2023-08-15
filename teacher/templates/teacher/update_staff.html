@@ -1,0 +1,94 @@
+{% extends 'admin/base_template.html' %}
+
+
+{% block title %}
+{% if title %}
+{{title}}
+{% else %}
+
+Register Staff
+{% endif %}
+{% endblock title %}
+  
+
+{% block content %}
+ <div class="content-wrapper" id='main-content'>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Update Staff</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Staff</a></li>
+              <li class="breadcrumb-item active">Update</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row ">
+    <div class="col-sm card">
+    
+
+      <form action="" method="post" enctype="multipart/form-data">
+            
+            {% csrf_token %}
+          <div class="card-body row ">
+          
+          {% for field in form %}
+            
+                <div class="form-group col-sm-6">
+                  <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field}}
+                  <label for="exampleInputEmail1">{{field.help_text}} </label>
+                  
+                
+                
+                </div>
+             
+            
+          {% endfor %}
+         
+          <div class="form-group col-sm-12">
+            
+             
+             
+              <button type="submit" class="btn btn-info ml-5">Update Staff</button>
+          
+          </div>
+           
+          </div>
+          
+      </form>
+    </div>
+
+    <div class="col-sm-3">
+      <h2>currently added</h2>
+      
+      {% for message in messages %}
+      <p class="text-success text-center">{{message}}</p>
+        
+      {% endfor %}
+
+      {% for staff in staffs %}
+      <a  href=" {% url 'teacher:edit-staffs' staff.admin.id staff.id %} " class="text-dark text-center nav-link">{{staff.admin}}</a>
+        
+      {% endfor %}
+
+
+        
+    </div>
+  </div>
+      </div>
+    </section>
+ </div>
+  
+
+
+{% endblock content %}

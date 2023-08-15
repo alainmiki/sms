@@ -1,0 +1,49 @@
+
+
+{% if by_student %}
+    <label class="text-dark" for="exampleInputEmail1">Get By </label>
+
+    <select  name="get_by" class= "form-control rounded", id= "exampleInputEmail1 " id='get_by'  hx-target= "#tableContent" hx-post="filter-marks" hx-trigger= "change"  required="false" >
+        <option value="all">all</option>
+        
+        {% if list_it %}
+            {% for data in object %}
+        <option value="{{data}}">{{data}}</option>
+        {% endfor %}
+        {% else %}
+        {% for data in object %}
+        <option value="{{data.admin}}">{{data.admin.username}}</option>
+        {% endfor %}
+        
+        {% endif %}
+            
+    </select>
+    <label class="text-info" for="exampleInputEmail1">Select the data category or allow the default as all  </label>
+
+
+{% else %}
+
+    <label class="text-dark" for="exampleInputEmail1">Get By </label>
+
+    <select name="get_by"  class= "form-control rounded", id= "exampleInputEmail1"   hx-target= "#tableContent" hx-post="filter-marks" hx-trigger= "change"  required="false"  >
+        <option value="all">all</option>
+        
+        {% if list_it %}
+            {% for data in object %}
+        <option value="{{data}}">{{data}}</option>
+        {% endfor %}
+        {% else %}
+        {% for data in object %}
+        <option value="{{data.name}}">{{data.name}}</option>
+        {% endfor %}
+        
+        {% endif %}
+            
+    </select>
+    <label class="text-info" for="exampleInputEmail1">Select the data category or allow the default as all  </label>
+
+
+
+    
+{% endif %}
+    

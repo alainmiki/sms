@@ -1,0 +1,146 @@
+ <div class="container-fluid">
+      <div class="row">
+        {% for candidate in admissions %}
+
+        <div class="col-md-12">
+          <div class="card card-success collapsed-card">
+            <div class="card-header">
+              <h3 class="card-title">
+                {{candidate.first_name}} {{candidate.last_name}}
+                <span class="badge badge-info"> Details & Letter</span>
+              </h3>
+
+              <div class="card-tools">
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="collapse"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-tool"
+                  data-card-widget="maximize"
+                >
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+              <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body" style="display: none">
+              <div class="container-md row">
+               <div class="col-sm">
+                    {{candidate.admission_request|safe}}
+               </div>
+               <div class="col-3">
+                   <img src="{{candidate.profile_picture.url}}" alt="{{candidate.first_name}}" class="img-fluid">
+               </div>
+               <div class="col-3">
+                   <img src="{{candidate.guardian_profile_picture.url}}" alt="{{candidate.guardian_full_name}}" class="img-fluid">
+               </div>
+              </div>
+
+              <!-- table of information -->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title text-info">Candidate Details</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>gender</th>
+                        <th>email</th>
+                        <th>class</th>
+                        <th>address</th>
+                        <th>phone</th>
+                        <th>department</th>
+                        <th>P.O.B</th>
+                        <th>D.O.B</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- {% for event in admissions %} -->
+                      <tr>
+                        <td>{{candidate.first_name}} {{candidate.last_name}}</td>
+                        <td>{{candidate.gender}}</td>
+                        <td>{{candidate.email}}</td>
+                        <td>{{candidate.class_room}}</td>
+                        <td>{{candidate.address}}</td>
+                        <td>{{candidate.phone}}</td>
+                        <!-- <td>{{candidate.phone}}</td> -->
+
+                        <td>{{candidate.department}}</td>
+                        <td>{{candidate.place_of_birth}}</td>
+                        <td>{{candidate.date_of_birth}}</td>
+                        
+                      </tr>
+                    
+
+                      <!-- {% endfor %} -->
+                    </tbody>
+                    <tfoot>
+                      <tr></tr>
+                    </tfoot>
+                  </table>
+
+                  <!-- guardian information -->
+                   <div class="card-header">
+                  <h3 class="card-title text-info">Candidate Guardian Details</h3>
+                </div>
+                <!-- /.card-header -->
+                   <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>Name</th>
+                       
+                        <th>email</th>
+                        
+                        <th>address</th>
+                        <th>phone</th>
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                     
+                      <tr>
+                        <td>{{candidate.guardian_title}}</td>
+                        <td>{{candidate.guardian_full_name}}</td>
+                        <td>{{candidate.guardian_email}}</td>
+                       
+                        <td>{{candidate.guardian_address}}</td>
+                        <td>{{candidate.guardian_phone}}</td>
+                        
+                      </tr>
+                    
+                    </tbody>
+                    <tfoot>
+                      <tr></tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+              <div class="d-flex align-items-center justify-content-between">
+                <button type="button" hx-post="{% url 'admission-approve-candidate' candidate.id %}" hx-target='#unapproved' class="btn btn-block bg-gradient-info btn-sm">Approve</button>
+                <button type="button" hx-post="{% url 'admission-decline-candidate' candidate.id %}" hx-target='#unapproved' class="btn btn-block bg-gradient-danger btn-sm"> Decline </button>
+              </div>
+            </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+
+        {% endfor %}
+        
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>

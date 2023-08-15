@@ -1,0 +1,52 @@
+{% load static %}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class=" text-center">Library Book</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="row mt-4">
+
+                                
+                                {% for book in books %}
+                                    <div class="col-sm-3">
+                                        {{book.title|title}}
+                                    <div class="position-relative">
+                                        {% comment %} <img src="{{book.poster.url}}" alt="Photo 1" class="img-fluid"> {% endcomment %}
+                                        <embed src="{{book.poster.url}}" class="" type=""style="max-height:150px; height:100vh;width:100% ;object-fit:stretch;">
+                                        <div class="ribbon-wrapper ribbon-lg">
+                                            <div class="ribbon bg-success text-lg">
+                                                {{book.subject}}
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <p class="text-info">{{book.author|title}}</p> 
+                                            <a href=" {% url 'adminhod:library-update' book.id %} " class="btn btn-primary btn-sm"> <li class="fa fa-edit"></li> </a>
+                                            
+                                            <a href=" {% url 'adminhod:library-delete' book.id %} " class="btn btn-danger btn-sm"> <li class="fa fa-trash"></li></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                    
+
+                                
+
+
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+</section>

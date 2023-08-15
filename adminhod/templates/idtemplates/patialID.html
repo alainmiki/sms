@@ -1,0 +1,104 @@
+
+{% load static %}
+
+<div style="display: flex; justify-content:space-evenly; flex-wrap:wrap;">
+
+                
+    {% for student in students  %}
+
+        <div style="flex-basis:320px ; flex-grow:0; width:100%; ">
+            
+            <!-- id card front -->
+            <div class="" id=""
+                style=" position: relative;width: 100%;border: 5px solid #ddd;border-radius: 12px;margin-bottom: 5px; height: 180px;background-colo;">
+                <header id="head" style="width: 100%;
+                                background: linear-gradient(rgba(0, 128, 0, 0.473)
+                                ,rgba(255, 0, 0, 0.329),rgba(255, 255, 0, 0.349));border-radius: 12px 12px 0px 0px;color: #ddd; display:flex;">
+                    <div class="camp" style="width: 85%;">
+                        <h4 style="margin: 7px auto 0 3px; font-size:14px; color:green; line-height:3px;">{{scname}}</h4>
+                        <p style="margin-left: 8px; margin-bottom:12px ;text-align:center; font-size:11px; color:red;line-height:1px; padding-top:12px">Student ID Card</p>
+                        <p style="margin-left: 8px; margin-bottom:12px ;text-align:center; font-size:11px; color:red;line-height:1px;">{{pobox}}</p>
+                        <p style="margin-left: 8px; margin-bottom:5px ;text-align:center; font-size:11px; color:rgb(158, 158, 0);line-height:0px;">Republic Du Cameroon</p>
+        
+                    </div>
+                    <img src="{{logo.url}}" alt="img" id="logo" style=" width: 55px;height: 55px;">
+        
+                </header>
+                <div class="" style="width: 100%;position:relative;height:100px;
+                    background:linear-gradient(rgba(255, 255, 0, 0.158),rgba(0, 128, 0, 0.274));">
+                    
+                    {% if student.admin.profile_picture %}
+                        <img src="{{student.admin.profile_picture.url}}" alt="" id="imgDisplay" style="float: left;width: 65px;height: 85px;margin-left: 2px;margin-top: 5px;">
+                    {% else %}
+                        <img src="{% static 'dist/img/user1-128x128.jpg'%}" alt="" id="imgDisplay" style="float: left;width: 65px;height: 85px;margin-left: 2px;margin-top: 5px;">
+                    {% endif %}
+                        
+                    
+        
+                    <ul style="width: 65%;float: left;padding-left: 8px;">
+                        <li id="" style=" list-style-type: none;font-size:12px;line-height:12px"> UID: <span id='num'>{{student.admin.uid}}</span></li>
+                        <li id="name" style=" list-style-type: none;font-size:12px;line-height:12px;">Name: {{student.admin.username|title}}</li>
+                        <li id="birth" style=" list-style-type: none;font-size:12px;line-height:12px;">Gender: {{student.admin.gender}}</li>
+                        <li id="birth" style=" list-style-type: none;font-size:12px;line-height:12px;">Class: {{student.class_room}}</li>
+                        <li id="birth" style=" list-style-type: none;font-size:12px;line-height:12px;">D.O.B: {{student.date_of_birth}}</li>
+                        <li id="fieldYear" style=" list-style-type: none;font-size:12px;line-height:12px;">Y.O.D: {{student.admission_date}}</li>
+                        <li id="" style=" list-style-type: none;font-size:12px;line-height:12px;"> Tell:  <span id='num'>{{student.admin.phone|urlize}}</span></li>
+                        <li id="name" style=" list-style-type: none;font-size:12px;line-height:12px;"></li>
+                    </ul>
+        
+                    <footer style="background-color:rgba(0, 128, 0, 0.473); position:relative; top:100px; height:13px ;border-radius: 0px 0px 12px 12px;"></footer>
+                </div>
+            </div>
+            <!-- id card back -->
+            <div class="" id=""
+                style=" position: relative;width: 100%;border: 5px solid #ddd;border-radius: 12px;margin-bottom: 7px; height: 180px;">
+                <header id="head" style="width: 100%;
+                                background: linear-gradient(rgba(0, 128, 0, 0.473)
+                                ,rgba(255, 0, 0, 0.329),rgba(255, 255, 0, 0.349));border-radius: 12px 12px 0px 0px;color: #ddd; display:flex;">
+                    <div class="camp" style="width: 85%;">
+                        <h4 style="margin: 7px auto 0 3px; font-size:14px; color:green; line-height:3px;">{{scname}}</h4>
+                        <p style="margin-left: 8px; margin-bottom:12px ;text-align:center; font-size:11px; color:red;line-height:1px; padding-top:12px">Student ID Card</p>
+                        <p style="margin-left: 8px; margin-bottom:12px ;text-align:center; font-size:11px; color:red;line-height:1px;">{{pobox}}</p>
+                        <p style="margin-left: 8px; margin-bottom:5px ;text-align:center; font-size:11px; color:rgb(158, 158, 0);line-height:0px;">Republic Du Cameroon</p>
+        
+                    </div>
+                    <img src="{{logo.url}}" alt="img" id="logo" style=" width: 55px;height: 55px;">
+        
+                </header>
+                <div class="" style="width: 100%;position:relative;height:100px;
+                    background:linear-gradient(rgba(255, 255, 0, 0.158),rgba(0, 128, 0, 0.274));">
+                    
+                    <p style="color:green;font-size:9px;line-height:7px; margin-bottom:4px;">This is a student identity card. If found return to the school or contact the school mobile number</p>
+                    
+        
+                    <div style="display: flex; margin-top:0%">
+                    <ul style="width: 47%;float: left;padding-left: 4px;margin-bottom:5px;">
+                        <li id="" style=" list-style-type: none;font-size:10px;line-height:12px"> School number: <span
+                                id='num'>{{phone}}</span></li>
+                        <li id="name" style=" list-style-type: none;font-size:10px;line-height:12px;">Date of Issue: {{issue}}</li>
+                        <li id="name" style=" list-style-type: none;font-size:10px;line-height:12px;">Website: {{website|urlize}} </li>
+                        <li id="birth" style=" list-style-type: none;font-size:10px;line-height:12px;">Head of School: <s>headofschool</s></li>
+                    </ul>
+                    <ul style="width: 53%;float: left;padding-left: 8px; margin-bottom:5px;">
+                        <li id="birth" style=" list-style-type: none;font-size:10px;line-height:12px;">Email: {{email|urlize}}</li>
+                        <li id="name" style=" list-style-type: none;font-size:10px;line-height:12px;"></li>
+                        <li id="fieldYear" style=" list-style-type: none;font-size:10px;line-height:12px;">Expiry Date: {{expire}}</li>
+                        <li id="birth" style=" list-style-type: none;font-size:10px;line-height:12px;">ID N<sup>o</sup>:
+                            {{student.admin.uid}}{% now '' %}</li>
+                    </ul>
+                    </div>
+        
+                    <footer style="background-color:rgba(0, 128, 0, 0.473); position:relative; top:5px; height:13px ;border-radius: 0px 0px 12px 12px;"></footer>
+                </div>
+            </div>
+
+
+        
+        
+        </div>
+
+        
+    {% endfor %}
+        
+    
+</div>

@@ -1,0 +1,56 @@
+ <form action="" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+                <div class="card-body row ">
+                
+                {% for field in form %}
+                  
+                    {% if field.name == 'paper' %}
+                        <div class="form-group col-sm-3">
+                    <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                      {{field}}
+                        <label class="custom-file-label" for="exampleInputFile"
+                          >Choose file</label
+                        >
+                      
+                      </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text">Upload</span>
+                      </div>
+
+                    </div>
+                    <label for="exampleInputEmail1">{{field.help_text}}</label>
+                        </div>
+                      
+                    {% else %}
+                      <div class="form-group col-sm-3">
+                        <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                        {{field}}
+                        <label class="text-info" for="exampleInputEmail1">{{field.help_text}} </label>
+                        
+                      
+                      
+                      </div>
+                    {% endif %}
+                  
+                {% endfor %}
+              
+                <div class="form-check col-sm-6 d-flex align-items-center justify-content-end">
+                   
+                  {% if s_title %}
+                  <button type="submit" class="btn btn-info ml-5">Update Paper</button>
+                  {% else %}
+                  <button type="submit" class="btn btn-info ml-5">Add Paper</button>
+                  {% endif %}
+                
+                </div>
+                
+                </div>
+
+                 {% for error in form.errors %}
+            <p class="text-success text-center">{{error}}</p>
+              
+            {% endfor %}
+                
+            </form>

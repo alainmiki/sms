@@ -1,0 +1,52 @@
+{% extends 'base1.html' %}
+
+
+{% block title %}
+{% if title %}
+{{title}}
+{% else %}
+{{request.user.username|title}}'s Marks Recodes
+{% endif %}
+{% endblock title %}
+  
+
+{% block content %}
+ <div class="content-wrapper" id='main-content'>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>{{request.user.username|title}}'s Marks Recodes</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">{{request.user.username|title}}'s Marks Recodes</a></li>
+              <li class="breadcrumb-item active">Viewing</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row ">
+    <div class="col-sm card" id="formSection">
+    
+      </div>
+    <div class="col-sm-12 card" id="filterForm">
+      {% include 'student/marksFilterForm.html' %}
+    
+      </div>
+
+      <div class="col-sm-12" id="tableContent">
+        {% include 'student/studentMarksTable.html' %}
+      </div>
+    </div>
+  </section>
+</div>
+  
+
+
+{% endblock content %}

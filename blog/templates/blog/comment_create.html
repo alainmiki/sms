@@ -1,0 +1,107 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+comment
+{% endblock title %}
+    
+{% block content%}
+
+
+    <div class=" " id='main-content'>
+      
+      <div class="user-block ">
+                  <img class="img-circle" src="{{post.user.profile_picture.url}}" alt="User Image">
+                  <span class="username"><a href="#">{{post.user.username|title}}</a></span>
+                  <span class="description">Shared publicly - {{post.pub_date|timesince}}</span>
+          </div>
+       
+              <!-- /.card-header -->
+              <br/>
+              <div class="card-body">
+                <p>{{post.content|safe|truncatewords:87|linebreaks|center:"15" }} </p>
+
+              
+              </div>
+  
+   
+     <div class="card-footer">
+                  {% comment %} <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i> Share</button> {% endcomment %}
+
+                 <a href="{% url 'blog:likes' post.id %} "><button class="bbtn btn-default btn-sm"><i class="far  fa-thumbs-up" aria-hidden="true"></i>  Like</button></a>
+
+              <a href=" {%url 'blog:comments' post.pk %} "><button class="btn btn-default btn-sm"><i class="far fa-comment" aria-hidden="true"></i></button></a>
+
+
+                <span class="float-right text-muted">{{post.like_set.count}} likes - {{post.comment_set.count}} comments</span>
+          </div>
+
+    </div>
+        </div>
+            
+      </div>
+       
+        
+    
+
+
+<form class="form-control-plaintext form-inline" action="" method="POST">
+    {% csrf_token %}
+    {{commentform|crispy}}
+    <button class='btn-success' type="submit"> <li class="fa fa-send" ></li>  Submit</button>
+</form>
+
+    
+
+<p class='btn-dark'><strong style="color: rgb(134, 26, 47);">{{commentcount}}</strong> comment</p>
+
+
+<div class='' style="">
+    {% for comment in post.comment_set.all %}
+  
+   
+    <img style='width:33px;height:50px ;border-radius:50%;;'  src="{{ comment.user.profile_picture.url }}" alt="u.username ">
+    
+    <span class="username"><a href="#">{{comment.user.username|title}}</a></span>
+                  <span class="description">commented - {{comment.create_date|timesince}}</span>
+  
+
+    <p>{{comment.text}}</p>
+
+
+    <div class="card-footer">
+               
+                 <a href="{% url 'blog:likescomments' comment.id %}"><button class="bbtn btn-default btn-sm"><i class="far  fa-thumbs-up" aria-hidden="true"></i>  Like</button></a>
+
+              <a href=" {%url 'blog:replycomments' comment.pk %} "><button class="btn btn-default btn-sm"><i class="far fa-comment" aria-hidden="true"></i></button></a>
+
+                <span class="float-right text-muted">{{comment.likecomment_set.count}} likes - {{comment.replycomment_set.count}} replies</span>
+          </div>
+
+    <hr>
+
+
+   {% endfor %}
+  
+    </div>
+
+{% comment %} <div class="pagination justify-content-center bg-white ">
+    <span class="step-links">
+        {% if posts.has_previous %}
+        <a class="btn btn-dark btn-sm" href="?page=1">&laquo; first</a>
+        <a class="btn btn-dark btn-sm"  href="?page={{ compagination.previous_page_number }}">previous</a>
+        {% endif %}
+    <span class="current btn-success btn btn-sm">
+    Page {{ compagination.number }} of {{ compagination.paginator.num_pages }}.
+    </span>
+        {% if posts.has_next %}
+        <a class="btn btn-dark btn-sm"  href="?page={{ compagination.next_page_number }}">next</a>
+        <a class="btn btn-dark btn-sm" href="?page={{ compagination.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div> {% endcomment %}
+
+
+
+
+{% endblock content %}

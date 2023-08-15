@@ -1,0 +1,50 @@
+
+      <form action="" method="post">
+            
+            {% csrf_token %}
+          <div class="card-body row ">
+            <div class="col-sm-12"  id="new">
+              
+            </div>
+          
+          {% for field in form %}
+                {% if field.name == 'semester' or field.name == "month" %}
+                
+                <div class="form-group col-sm-2" id='get_by'>
+                  <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field|safe}}
+                  <label class="text-info" for="exampleInputEmail1">{{field.help_text}}  </label>
+                </div>
+                  {% else %}
+
+                  <div class="form-group col-sm-2">
+                    <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                    {{field|safe}}
+                    <label class="text-info" for="exampleInputEmail1">{{field.help_text}}  </label>
+                    
+                  </div>
+                {% endif %}
+             
+            
+          {% endfor %}
+
+          <div class="form-group col-sm-2 d-flex align-items-center justify-content-end">
+                  <button class="btn btn-md btn-info" hx-post=" {% url 'marks:report-card' %}" hx-trigger="click" hx-target='#reportcard'>Submit</button>
+                    
+            </div>
+
+          
+
+          {% for error in form.errors %}
+          <p class="text-danger text-center">{{error}}</p>
+          {% endfor %}
+
+           {% for message in messages %}
+          <p class="text-danger text-center">{{message}}</p>
+          {% endfor %}
+           
+          </div>
+
+          
+          
+      </form>

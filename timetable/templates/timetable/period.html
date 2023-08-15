@@ -1,0 +1,54 @@
+{% extends 'admin/base_template.html' %}
+
+
+{% block title %}
+{% if title %}
+{{title}}
+{% else %}
+Setting Timetable periods
+{% endif %}
+{% endblock title %}
+
+
+{% block content %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Setting Timetable Periods</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Timetable Periods</a></li>
+            <li class="breadcrumb-item active">Setting</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row ">
+        <div class="col-sm-12">
+          <h3 class="text-center text-info bg-warning">
+            Please when setting make sure to take note of the deference between 'am' and 'pm' 
+          </h3>
+        </div>
+        <div class="col-sm card" id="formSection">
+
+          {% include 'timetable/timetablePatialForm.html' %}
+        </div>
+
+        <div class="col-sm-12" id="tableContent">
+          {% include 'timetable/periodTable.html' %}
+        </div>
+      </div>
+  </section>
+</div>
+
+
+
+{% endblock content %}

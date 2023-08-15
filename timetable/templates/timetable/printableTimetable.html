@@ -1,0 +1,245 @@
+
+   <div class="container" id="timetable" style="text-align: center; font-size:20px;background:skyblue; font-style:oblique">
+        <h3 style="text-align: center; font-size:20px;background:skyblue; font-style:oblique">{{class1|upper}} Timetable</h3>
+        <table border="2" style='width:100%'>
+            <tr>
+                <!-- <th>Day</th> -->
+                <th style="text-align: center;background:gray; color:aliceblue;font-size:16px;">Sunday</th>
+                <th style="text-align: center;background:gray; color:aliceblue;font-size:16px;">Monday</th>
+                <th style="text-align: center;background:gray; color:aliceblue;font-size:16px;">Tuesday</th>
+                <th style="text-align: center;background:gray; color:aliceblue;font-size:16px;">Wednesday</th>
+                <th style="text-align: center;background:gray; color:aliceblue;font-size:16px;">Thursday</th>
+                <th style="text-align: center;background:gray; color:aliceblue;font-size:16px;">Friday</th>
+                <th style="text-align: center;background:gray; color:aliceblue;font-size:16px;">Saturday</th>
+        
+            </tr>
+        
+            <tr>
+                <td style="background: gray;color:whitesmoke;">
+                    {% for time in sunday %}
+                    {% if class %}
+                    <h5 style="text-align: center; color:black;font-size:12px;">{{time.class_id|upper}}</h5>
+        
+                    {% endif %}
+                    <h6 style="text-align: center; color:blue;font-size:12px;">{{time.staff_table.subject_id|upper}}</h6>
+                    <em style="text-align: center;font-size:10px;">{{time.start_time}} -> {{time.end_time}}</em>
+                    <hr>
+                    {% endfor %}
+                </td>
+
+                {% comment %} Monday section {% endcomment %}
+
+                <td>
+                    {% for time in monday %}
+                    {% if class %}
+
+
+                    <h5 style="text-align: center; color:black;font-size:10px;">{{time.staff_table.class_id|upper}}</h5>
+        
+                    {% endif %}
+
+                    {% if forloop.counter == 5 %}
+                    <h6 style="text-align: center; color:red;font-size:10px;">{{break.name|upper}}</h6>
+                    <em style="text-align: center;font-size:10px;">{{break.start_time}} -> {{break.end_time}}</em>
+                    <hr>
+                    {% endif %}
+
+                    <h6 style="text-align: center; color:blue;font-size:10px;">{{time.staff_table.subject_id|upper}}</h6>
+                    <em style="text-align: center;font-size:10px;">{{time.period.start_time}} -> {{time.period.end_time}}</em>
+                    <hr>
+                    {% endfor %}
+                </td>
+
+                {% comment %} Tuesday section {% endcomment %}
+
+                <td>
+                    {% for time in tuesday %}
+        
+                    {% if class %}
+                    <h5 style="text-align: center; color:black;font-size:10px;">{{time.class_id|upper}}</h5>
+        
+                    {% endif %}
+
+                    {% if forloop.counter == 5 %}
+                    <h6 style="text-align: center; color:red;font-size:10px;">{{break.name|upper}}</h6>
+                    <em style="text-align: center;font-size:10px;">{{break.start_time}} -> {{break.end_time}}</em>
+                    <hr>
+                    {% endif %}
+        
+        
+                    <h6 style="text-align: center; color:blue;font-size:10px;">{{time.staff_table.subject_id|upper}}</h6>
+                    <em style="text-align: center;font-size:10px;">{{time.period.start_time}} -> {{time.period.end_time}}</em>
+                    <hr>
+                    {% endfor %}
+                </td>
+
+                {% comment %} wednesday section {% endcomment %}
+
+                <td>
+                    {% for time in wednesday %}
+                    {% if class %}
+                    <h5 style="text-align: center; color:black;font-size:10px;">{{time.class_id|upper}}</h5>
+        
+                    {% endif %}
+
+                    {% if forloop.counter == 5 %}
+                    <h6 style="text-align: center; color:red;font-size:10px;">{{break.name|upper}}</h6>
+                    <em style="text-align: center;font-size:10px;">{{break.start_time}} -> {{break.end_time}}</em>
+                    <hr>
+                    {% endif %}
+
+                    <h6 style="text-align: center; color:blue;font-size:10px;">{{time.staff_table.subject_id|upper}}</h6>
+                    <em style="text-align: center;font-size:10px;">{{time.period.start_time}} -> {{time.period.end_time}}</em>
+                    <hr>
+                    {% endfor %}
+                </td>
+
+                {% comment %} Thursday section {% endcomment %}
+
+                <td>
+                    {% for time in thursday %}
+                    {% if class %}
+                    <h5 style="text-align: center; color:black;font-size:10px;">{{time.class_id|upper}}</h5>
+        
+                    {% endif %}
+
+                    {% if forloop.counter == 5 %}
+                    <h6 style="text-align: center; color:red;font-size:10px;">{{break.name|upper}}</h6>
+                    <em style="text-align: center;font-size:10px;">{{break.start_time}} -> {{break.end_time}}</em>
+                    <hr>
+                    {% endif %}
+
+                    <h6 style="text-align: center; color:blue;font-size:10px;">{{time.staff_table.subject_id|upper}}</h6>
+                    <em style="text-align: center;font-size:10px;">{{time.period.start_time}} -> {{time.period.end_time}}</em>
+                    <hr>
+                    {% endfor %}
+                </td>
+
+
+                {% comment %} friday section {% endcomment %}
+                <td>
+                    {% for time in friday %}
+                    {% if class %}
+                    <h5 style="text-align: center; color:black;font-size:10px;">{{time.class_id|upper}}</h5>
+        
+                    {% endif %}
+                     {% if forloop.counter == 5 %}
+                    <h6 style="text-align: center; color:red;font-size:10px;">{{break.name|upper}}</h6>
+                    <em style="text-align: center;font-size:10px;">{{break.start_time}} -> {{break.end_time}}</em>
+                    <hr>
+                    {% endif %}
+                    <h6 style="text-align: center; color:blue;font-size:10px;">{{time.staff_table.subject_id|upper}}</h6>
+                    <em style="text-align: center;font-size:10px;">{{time.period.start_time}} -> {{time.period.end_time}}</em>
+                    <hr>
+                    {% endfor %}
+                </td>
+
+                <td style="background: gray;color:whitesmoke;">
+                    {% for time in satuday %}
+                    {% if class %}
+                    <h5 style="text-align: center; color:black;font-size:10px;">{{time.class_id|upper}}</h5>
+        
+                    {% endif %}
+                    
+                   
+                    {% empty %}
+                        
+                    <h6 style="text-align: center; color:blue;font-size:10px;">{{time.subject_id|upper}}</h6>
+                    <em style="text-align: center;font-size:10px;">{{time.start_time}} -> {{time.end_time}}</em>
+                    <hr>
+                    {% endfor %}
+                </td>
+        
+            </tr>
+        
+        </table>
+    </div>
+    <button class="btn-sm btn-info m-4" onclick="createPDF()" >Print/Save</button>
+  
+
+
+{% comment %} <h5 class="text-center text-warning bg-dark p-3"> School Timetable Data
+   
+</h5>
+      
+      
+      <div>
+          
+       <img src='{{file.url}}'>
+        <div class="card-body">
+          <div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+              <div class="jsgrid-grid-header jsgrid-header-scrollbar">
+                  <table class="jsgrid-table text-center" border=2>
+                      <tr class="jsgrid-header-row">
+                        
+                         <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 250px;">Teacher Name</th>
+                         
+                          <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 250px;">Day</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">class</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Subject</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Department</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Start Time</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> End Time</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Action</th>
+                  
+                        </tr>
+                        {% for timetable in timetable_obj %}
+                        
+                        <tr class="jsgrid-row">
+                            <td class="jsgrid-cell" style="width: 150px;">{{timetable.staff_id.admin.username}}</td>
+                            <td class="jsgrid-cell" style="width: 150px;">{{timetable.day}}</td>
+                            <td class="jsgrid-cell" style="width: 150px;">{{timetable.class_id.name}}</td>
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">{{timetable.subject_id.name}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{timetable.department_id.name}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{timetable.period.start_time}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{timetable.period.end_time}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">
+                                <a href="{% url 'timetable:timetable-reg' timetable.id %}" hx-target="#formSection"  class="btn float-right btn-info ">Update</a>
+                            </td>
+                            
+                        </tr>
+                         {% endfor %}
+                        </table>
+                    </div>
+                    <div class="jsgrid-load-panel" style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please, wait...</div>
+                </div>
+        </div>
+        
+     
+
+
+        
+    </div> {% endcomment %}
+
+      <script>
+        function createPDF() {
+            var sTable = document.getElementById('timetable').innerHTML;
+
+            var style = "<style>";
+            style = style + "table {width: 100%;font: 17px Calibri;}";
+            style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+            style = style + "padding: 2px 3px;text-align: center;}";
+            style = style + "</style>";
+
+            // CREATE A WINDOW OBJECT.
+            var win = window.open('', '', 'height=700,width=700');
+
+            win.document.write('<html><head>');
+            win.document.write('<title>{{fee.student_id.username}}</title>');   // <title> FOR PDF HEADER.
+            win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+            win.document.write('</head>');
+            win.document.write('<body>');
+            win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+            win.document.write('</body></html>');
+
+            win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+            win.print();    // PRINT THE CONTENTS.
+        }
+
+    </script>
+
+    

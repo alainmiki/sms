@@ -1,0 +1,107 @@
+{% extends 'base1.html' %}
+
+
+{% block title %}
+Assignmens Management
+
+{% endblock title %}
+  
+
+{% block content %}
+ <div class="container-fluid" id='main-content'>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Assignmens Management</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Assignmens </a></li>
+              <li class="breadcrumb-item active">Management</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row ">
+    <div class="col-sm card">
+    
+
+      <form action="" method="post">
+            
+            {% csrf_token %}
+          <div class="card-body row ">
+          {{form.media}}
+          {% for field in form %}
+            
+            {% if field.name == 'leave_message' %}
+              <div class="form-group col-sm-12">
+                  <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field}}
+                  <label for="exampleInputEmail1">{{field.help_text}} </label>
+              </div>
+            {% else %}
+              <div class="form-group col-sm-4">
+                <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                {{field}}
+                <label for="exampleInputEmail1">{{field.help_text}} </label>
+              </div>
+            {% endif %}
+                
+                  
+                
+                
+              
+             
+            
+          {% endfor %}
+         
+          <div class="form-group col-sm-12">
+            
+             
+             
+              <button type="submit" class="btn btn-info ml-5">Send Assignmen</button>
+          
+          </div>
+           
+          </div>
+
+          
+          
+      </form>
+    </div>
+
+    <div class="col-sm-12">
+      <h2 class="text-center text-warning bg-dark p-3">My Assignmens </h2>
+      
+      {% for message in messages %}
+      <p class="text-success text-center">{{message}}</p>
+        
+      {% endfor %}
+
+      {% for assignments in assignments %}
+      <div>
+          <a  href=" {% url 'teacher:assignment-update' assignments.id %} " class="text-dark text-center nav-link">
+          <h5 class="text-success">Subject:{{assignments.subject}}</h5>
+               {{assignments.submission_date }}</a>
+          
+        </div>
+        
+      {% endfor %}
+
+
+        
+    </div>
+  </div>
+      </div>
+    </section>
+ </div>
+  
+
+
+{% endblock content %}

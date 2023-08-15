@@ -1,0 +1,91 @@
+
+{% extends 'base1.html' %}
+
+{% block title %}
+Document of staff
+{% endblock title %}
+
+{% block banner %}{% endblock banner %}
+
+{% block content %}
+
+<div class="container-fluid mt-5"  id="main-content" style="min-height: 2680.06px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Document staff</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Document</a></li>
+              <li class="breadcrumb-item"><a href="#">staff</a></li>
+              
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+   
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card card-primary">
+                    {% comment %} <div class="card-header">
+                        <h3 class=" text-center">Document staff</h3>
+                    </div> {% endcomment %}
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="row mt-4">
+
+                                
+                                {% for book in books %}
+                                    <div class="col-sm-3">
+                                        {{book.title|title}}
+                                    <div class="position-relative">
+                                        <img src="{{book.poster.url}}" alt="Photo 1" class="img-fluid">
+                                        
+                                            <embed src="{{book.paper.url}}" class="" type="" style="max-height:150px; height:100vh;width:100%;object-fit:stretch;"> 
+                                        <div class="ribbon-wrapper ribbon-lg">
+                                            <div class="ribbon bg-success text-lg">
+                                                {{book.subject}}
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <p class="text-info">{{book.author|title}}</p> 
+                                            <a class="btn btn-default btn-sm " href="{{book.document.url}}" download=""><i class="fa fa-download" aria-hidden="true"></i> Download</a> 
+
+                                            <a href=" {% url 'staffdocument-view' book.id %} " class="btn btn-primary btn-sm"> <li class="fa fa-edit"> View Online </li> </a>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                    
+
+                                
+
+
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+</section>
+    <!-- /.content -->
+  </div>
+
+{% endblock content %}
+

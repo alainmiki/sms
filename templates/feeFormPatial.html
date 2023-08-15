@@ -1,0 +1,77 @@
+<div class="col-sm card">
+    
+      <p class="text-center text-info">Please fill the bellow form to initialize the payment process!.</p>
+
+      <form action="" method="post">
+            
+            {% csrf_token %}
+          <div class="card-body row ">
+            <div class="col-sm-12"  id="new">
+              
+            </div>
+          
+          {% for field in form %}
+                {% if field.name == "description" %}
+                <div class="form-group col-sm-12">
+                  <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field}}
+                  
+                  <label class="text-info" for="exampleInputEmail1">{{field.help_text}} </label>
+                  
+                {% else %}
+                <div class="form-group col-sm-3">
+                  <label class="text-primary" for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field|safe}}
+                  {{field.error}}
+                  <label class="text-info" for="exampleInputEmail1">{{field.help_text}}  </label>
+                  
+                
+                {% endif %}
+                
+                
+                </div>
+             
+            
+          {% endfor %}
+
+          {% for error in form.errors %}
+          <!-- <p>please fill all the fields</p> -->
+          <p class="text-danger text-center p-3">please fill :{{error}}</p> 
+          {% endfor %}
+         
+          <div class="form-group col-sm-12 ">
+            
+              <button type="submit" hx-target="#feeForm" hx-post="{% url 'fees-pay-online' %}" hx-confirm="Are you Sure You Want To Pay The Amount You Entered?" class="btn float-right btn-info ">Subment Payment</button>
+          
+          </div>
+           
+          </div>
+
+          
+          
+      </form>
+       {% for message in messages %}
+      <p class="text-success text-center h5">{{message}}</p>
+        
+      {% endfor %}
+      {% comment %} ===================== {% endcomment %}
+      {% comment %} show receipt form if true {% endcomment %}
+      {% if show %}
+      <div class="container row bg-primary">
+        <div class="col-sm-6 m-sm-5">
+
+          <input type="text" class="form-control" name="name" hx-get='{% url "get_receipt"%}' hx-trigger="keyup change delay:2s" hx-target="#receipts"
+          placeholder="Enter the name here to get your receipt. NB: Make sure you enter the name correctly">
+        </div>
+      </div>
+      {% endif %}
+
+      
+      {% if receipts %}
+
+      {% comment %} {% include 'receipt_images.html' %} {% endcomment %}
+        
+      {% endif %}
+        
+        
+      </div>

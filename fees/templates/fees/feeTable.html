@@ -1,0 +1,75 @@
+<h5 class="text-center text-warning bg-dark p-3"> School Fees List
+    {% if file %}
+          <a href="{{file.url}}"
+           download class="btn btn-info btn-sm text-sucess float-right">Download Reciept</a>
+          {% endif %}
+</h5>
+      
+      
+      <div>
+          
+       <img src='{{file.url}}'>
+        <div class="card-body">
+          <div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+              <div class="jsgrid-grid-header jsgrid-header-scrollbar">
+                  <table class="jsgrid-table text-center" border=2>
+                      <tr class="jsgrid-header-row">
+                        
+                         <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 250px;">Reciept No</th>
+                         
+                          <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 250px;">Student Name</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">class</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Entry</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Trimester</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Amount</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Due Fee</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Total Fee</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Partly Paid</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Fully Paid</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Action</th>
+                  
+                        </tr>
+                        {% for fees in fesses %}
+                        
+                        <tr class="jsgrid-row">
+                            <td class="jsgrid-cell" style="width: 150px;">{{fees.receipt_no}}</td>
+                            <td class="jsgrid-cell" style="width: 150px;">{{fees.student_id.admin.username}}</td>
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">{{fees.class_room}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{fees.entry}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{fees.semester}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{fees.amount}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{fees.due_fee}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{fees.total_fee}}</td>
+                            <td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">
+                                {% if fees.partly_paid %}
+                                <input type="checkbox" name="status" checked id="">
+                                {% else %}
+                                 <input type="checkbox" name="status" value="false" id="">
+                                {% endif %}
+                               
+                            </td>
+                            <td> {% if fees.fully_paid %}
+                                <input type="checkbox" name="status" checked id="">
+                                {% else %}
+                                 <input type="checkbox" name="status" value="false" id="">
+                                {% endif %}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">
+                                <button hx-post="{% url 'fees:fees-get_updateForm' fees.receipt_no %}" hx-target="#formSection"  class="btn float-right btn-info ">Update</button>
+                            </td>
+                            
+                        </tr>
+                         {% endfor %}
+                        </table>
+                    </div>
+                    <div class="jsgrid-load-panel" style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please, wait...</div>
+                </div>
+        </div>
+        
+     
+
+
+        
+    </div>

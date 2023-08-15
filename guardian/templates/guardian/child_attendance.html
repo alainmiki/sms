@@ -1,0 +1,84 @@
+{% extends 'base1.html' %}
+
+
+{% block title %}
+{% if title %}
+{{title}}
+{% else %}
+Guardian View Child/Children Attendance
+{% endif %}
+{% endblock title %}
+  
+
+{% block content %}
+ <div class="container-fluid">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Guardian View Child/Children Attendance</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Guardian View Child/Children Attendance</a></li>
+              <li class="breadcrumb-item active">Child Management</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row ">
+              {% comment %} <span hx-get="{% url 'fees:clear' %}" hx-trigger='every 70s' hx-target="#formSection">clear Form</span> {% endcomment %}
+    <div class="col-sm card" id="formSection">
+    
+      </div>
+    <div class="col-sm-12 card" id="filterForm">
+      <form action="">
+        {% csrf_token %}
+        <p class="text-center text-info">Select a child name from the dropdown child name field below to view child attendance and use the filter-by field to get attendance according to a semester/trimester</p>
+        <div class="row">
+
+            <div class="col-sm-6">
+                <label for="name" class="text-info">Select Child Name</label>
+                <select class="form-control" name="child" id=""  hx-post="{% url 'guardian:get-child-attendance' %}" hx-target="#tableContent">
+                
+                    {% for child in children %}
+                    <option value="{{child.id}}">{{child.admin.username|title}}</option>
+                    {% endfor %}
+                
+                
+                
+                </select>
+            </div>
+            <div class="col-sm-6">
+                <label for="filter" class="text-info">Filter By</label>
+                <select class="form-control" name="filter-by" id="" hx-post="{% url 'guardian:get-child-attendance' %}" hx-target="#tableContent">
+                
+                    <option value="all">All</option>
+                    <option value="ft">First Trimester/Semester</option>
+                    <option value="st">Second Trimester/Semester</option>
+                    <option value="tt">Third Trimester/Semester</option>
+                   
+                
+                </select>
+            </div>
+        </div>
+       
+      </form>
+    
+      </div>
+
+      <div class="col-sm-12" id="tableContent">
+        {% include 'guardian/attendance_list.html' %}
+      </div>
+    </div>
+  </section>
+</div>
+  
+
+
+{% endblock content %}

@@ -1,0 +1,115 @@
+{% extends 'base1.html' %}
+
+
+{% block title %}
+{% if title %}
+{{title}}
+{% else %}
+
+Studuent Leave
+{% endif %}
+{% endblock title %}
+  
+
+{% block content %}
+ <div class="content-wrapper" id='main-content'>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Student Leave</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Student</a></li>
+              <li class="breadcrumb-item active">Leave</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row ">
+    <div class="col-sm card">
+    
+
+      <form action="" method="post">
+            
+            {% csrf_token %}
+          <div class="card-body row ">
+          <!-- <input type="datetime" name="" hidden id=""> -->
+          {% for field in form %}
+                {% if field.name == "leave_message" %}
+                <div class="form-group col-sm-12">
+                  <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field}}
+                  
+                  <label class="text-info" for="exampleInputEmail1">{{field.help_text}} </label>
+                </div>
+                {% else %}
+                <div class="form-group col-sm-4">
+                  <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field}}
+                  <label class="text-info" for="exampleInputEmail1">{{field.help_text}} </label>
+                  
+                
+                </div>
+                {% endif %}
+                
+                
+             
+            
+          {% endfor %}
+         
+          <div class="form-group col-sm-12">
+            
+              <button type="submit" class="btn btn-info ml-5">Send Leave Request</button>
+          
+          </div>
+           
+          </div>
+
+          
+          
+      </form>
+    </div>
+
+    <div class="col-sm-12">
+      <h2 class="text-center text-warning bg-dark p-3">My Leaves </h2>
+      
+      {% for message in messages %}
+      <p class="text-success text-center">{{message}}</p>
+        
+      {% endfor %}
+
+      {% for leave in leaves %}
+      <div>
+          <h5 class="text-success">{{leave.student_id.admin.username}}</h5>
+          <a  href=" {% url 'student:notify-students' %} " class="text-dark text-center nav-link">{{leave.leave_message}}</a>
+          
+          {% if leave.leave_status %}
+          <p class="text-center  float-right  badge badge-success">Approved</p>
+          {% elif leave.leave_end_date <= time %}
+               <p class="text-center  float-right  badge badge-warning">Expired</p>
+          {% else %}
+             <span class="text-center float-right  badge badge-info">Pending</>
+          {% endif %}
+              
+        </div>
+        
+      {% endfor %}
+
+
+        
+    </div>
+  </div>
+      </div>
+    </section>
+ </div>
+  
+
+
+{% endblock content %}

@@ -1,0 +1,180 @@
+
+{% load static %}
+
+
+{% for average in averages %}
+
+    
+
+    <div style="margin-bottom:24px; font-family:Georgia, 'Times New Roman', Times, serif;">
+
+
+        
+        {% if average.average >= 50 %}
+            
+            <div
+                style="width:  1293px ; height:800px;background:url('{% static 'images/funeral-flowers-i-express-white-image-33370978 - Copy.jpg' %}');margin:auto ; border:34px groove gray; margin-bottom: 190px; margin-top: 66px; ">
+        
+                <div
+                    style="width:  1242px ; height:750px; padding:2px;  border:24px solid black;border-image: url('{% static 'images/lavender-background-wallpaper.jpg' %}') 30 round;">
+            
+                    <div
+                        style="width:  1220px ; height:730px; background:rgba(255, 255, 255, 0.849);  text-align:center;font-size: 1.3em;border: 12px groove gray; margin:auto; box-shadow:0 2px 6px 0;">
+                        <p style="font-size:2em;color:gray; line-height: 18px;"> This is to Certify That</p>
+                        <p
+                            style=" font-size:1.5em;font-style: italic ; line-height: 18px; ">
+                            <u><b><em>{{average.student_id.admin.username|title}}</em></b></u>
+                        </p>
+                        <p style="line-height: 14px ;" >has achieved the high standard of academic Excellence by maintaining a 
+                            <b><u style="font-size: 2.2em;">
+                                    
+                                    {% if average.average >= 90 %}
+                                        A*
+                                    {% elif average.average >= 80 and average.average < 90 %}
+                                        A
+                                    {% elif average.average >= 70 and average.average < 80 %}
+                                    B
+                                    {% elif average.average >= 60 and average.average < 70 %}
+                                        C
+                                    {% elif average.average >= 50 and average.average < 60 %}
+                                        D
+                                    {% endif %}
+                                        
+                            </u></b>
+                            grade average and is herby placed on the </p>
+            
+                        <h1 style="font-size: 143px; font-family: castellar;font-weight:600; color:red; line-height:120px;">HONOR ROLL</h1>
+                        <P>Awarded at <u><b>{{schoolinfo.school_name_full|title}} </b></u></P>
+                        <p>this <b><u> {% now 'd/M/Y' %} </u></b></p>
+            
+                        <div style="display: flex; justify-content:space-between; padding:21px;">
+            
+                            <div>
+                                <p>Principal:</p>
+                                <img src="{{schoolinfo.h_o_s_signature.url}}" width="100" height="20" alt="principal signature" srcset="">
+                            </div>
+                            <div>
+                                <img src="{{schoolinfo.school_logo.url}}" width="110" alt="school stamp" srcset="">
+                            </div>
+                            <div>
+                                <img src="{{schoolinfo.school_stamp.url}}" width="110" alt="school stamp" srcset="">
+                            </div>
+            
+                        </div>
+            
+            
+            
+                    </div>
+            
+            
+                </div>
+        
+        
+        
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+{% endfor %} 
+
+{% for average in averages %}
+
+    <div style="margin-bottom:24px; font-family:Georgia, 'Times New Roman', Times, serif;">
+
+               
+        <div
+            style="width:  1250px ; height:700px;padding: 10px;background:url('{% static 'images/ima3.jpg' %}');margin:auto; border:12px solid gray;border-image: url('{% static 'images/lavender-background-wallpaper.jpg' %}') 30 round; margin:auto; margin-bottom: 20%; margin-top: 30%; ">
+
+
+
+            <div
+                style="width:  1200px ; height:650px; background:rgba(255, 255, 255, 0.918);border:15px solid gray; border-image: url('{% static 'images/lavender-background-wallpaper.jpg' %}') 30 round; margin:auto; text-align:center; padding:8px;">
+                <p style="line-height:16px ;">{{schoolinfo.school_name_full|title}}
+                    ({{schoolinfo.school_name_abbreviation|upper}}) </p>
+                <div style="display: flext;justify-content:space-between;">
+
+                    <div>
+
+                        <h1
+                            style="font-family:Georgia, 'Times New Roman', Times, serif; font-size:4.5em; font-weight:bolder;line-height:30px ;">
+                            Certificate of Achievement </h1>
+                        <!-- <p>P.O.Box: 253354Eg</p>
+                                <p>address</p> -->
+                    </div>
+                </div>
+                <h4 style=" font-family:Georgia, 'Times New Roman', Times, serif; font-size:2em;font-style: italic  ;">
+                    {{average.student_id.admin.username|title}} </h4>
+
+                <p style="line-height:16px ;">Has Been Awarded this Star Certificate as Recognition for demonstrating great:
+                </p>
+
+                <div style="display: flex; justify-content:space-evenly;margin-bottom:67px;">
+
+
+
+                    {% for subject in average.subjects_grades.all %}
+
+
+                    {% if subject.average >= 50 %}
+                    <div>
+                        <P style="line-height:16px ;">Excellence in</P>
+
+                        <p style="line-height:16px ;">{{subject.subject_id.name|title}}</p>
+                        {% if subject.grade == "A*" %}
+                        <img src="{% static 'images/diamondstar.jpeg' %}" alt="" width="100" srcset="">
+
+                        {% elif subject.grade == "A" %}
+                        <img src="{% static 'images/goldstar.jpeg' %}" alt="" width="100" srcset="">
+
+                        {% elif subject.grade == "B" %}
+                        <img src="{% static 'images/goldstar.jpeg' %}" alt="" width="100" srcset="">
+
+                        {% elif subject.grade == "C" %}
+
+                        <img src="{% static 'images/silverstar.jpeg' %}" alt="" width="100" srcset="">2
+                        {% elif subject.grade == "D" %}
+
+                        <img src="{% static 'images/silverstar.jpeg' %}" alt="" width="100" srcset="">
+                        {% endif %}
+
+
+                    </div>
+                    {% endif %}
+
+                    {% endfor %}
+
+
+                </div>
+
+                <div style="display: flex; justify-content:space-between; line-height:16px ;">
+
+                    <div>
+                        <p>Principal:</p>
+                        <img src="{{schoolinfo.h_o_s_signature.url}}" width="100" height="20" alt="principal signature"
+                            srcset="">
+                    </div>
+                    <div>
+                        <img src="{{schoolinfo.school_stamp.url}}" width="110" alt="school stamp" srcset="">
+                    </div>
+                    <p>Done at {{schoolinfo.school_name_abbreviation|upper}} this day {% now 'd/M/Y' %} </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    
+{% endfor %}
+
+
+
+

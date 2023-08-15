@@ -1,0 +1,59 @@
+
+ 
+    <h5 class="text-center text-warning bg-dark p-3"> School Timetable Data</h5>
+    
+    
+    <div>
+    
+        <img src='{{file.url}}'>
+        <div class="card-body">
+            <div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+                <div class="jsgrid-grid-header jsgrid-header-scrollbar">
+                    <table class="jsgrid-table text-center" border=2>
+                        <tr class="jsgrid-header-row">
+    
+                            <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 250px;">Period</th>
+    
+    
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">
+                                Start Time</th>
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">
+                                End Time</th>
+    
+                            <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">
+                                Action</th>
+    
+                        </tr>
+                        {% for period in periods %}
+    
+                        <tr class="jsgrid-row">
+                            <td class="jsgrid-cell" style="width: 150px;">{{period.name}}</td>
+                         
+                            <td class="jsgrid-cell" style="width: 200px;">{{period.start_time}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{period.end_time}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">
+                                <a href="{% url 'timetable:update-period' period.id %}" hx-target="#formSection"
+                                    class="btn float-right btn-info ">Update</a>
+                            </td>
+    
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="jsgrid-load-panel"
+                    style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please, wait...</div>
+            </div>
+        </div>
+    
+    
+    
+    
+    
+    </div>
+
+
+
+
+
+
+  

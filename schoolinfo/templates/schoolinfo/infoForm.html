@@ -1,0 +1,167 @@
+{% extends 'admin/base_template.html' %}
+
+
+{% block title %}
+{% if title %}
+{{title}}
+{% else %}
+Set/Update School Information
+{% endif %}
+{% endblock title %}
+
+
+{% block content %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>
+            Set/Update School Information
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">School</a></li>
+            <li class="breadcrumb-item active"> Set/Update School Information
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- Main content -->
+  <section class="content" id='main-content'>
+    <div class="container-fluid">
+      
+      <div class="row ">
+        
+          <div class="col-sm-12 p-2 row">
+          
+            {% for info in infos %}
+            <div class="col-sm-3 container">
+               {% if info.school_banner_image %}
+              <img src="{{info.school_banner_image.url}}" alt="" class="img-fluid image-fluid"
+                style="max-height:200px; height:100vh;width:100%;object-fit:stretch;">
+                {% else %}
+                <img src="" alt="" class="img-fluid image-fluid"
+                style="max-height:200px; height:100vh;width:100%;object-fit:stretch;">
+                {% endif %}
+              <h4 class="text-center text-info">School Banner Image</h4>
+            </div>
+            <div class="col-sm-3 container">
+             
+                 {% if info.school_logo %}
+                <img src="{{info.school_logo.url}}" alt=" stamp" class="img-fluid image-fluid"
+                style="max-height:200px; height:100vh;width:100%;object-fit:stretch;">.
+                {% else %}
+                <img src="" alt="" class="img-fluid image-fluid"
+                style="max-height:200px; height:100vh;width:100%;object-fit:stretch;">
+              {% endif %}
+                
+              <h4 class="text-center text-info">School logo</h4>
+            </div>
+          
+            <div class="col-sm-3 container">
+              
+              {% if info.school_stamp %}
+                <img src="{{info.school_stamp.url}}" alt=" stamp" class="img-fluid image-fluid"
+                style="max-height:200px; height:100vh;width:100%;object-fit:stretch;">.
+                {% else %}
+                <img src="" alt="" class="img-fluid image-fluid"
+                style="max-height:200px; height:100vh;width:100%;object-fit:stretch;">
+              {% endif %}
+                
+              
+              <h4 class="text-center text-info">School Stamp Image</h4>
+            </div>
+            <div class="col-sm-3 container">
+               {% if info.h_o_s_signature %}
+                 <img src="{{info.h_o_s_signature.url}}" alt="" class="img-fluid image-fluid"
+                style="max-height:200px; height:100vh;width:100%;object-fit:stretch;">
+                {% else %}
+                <img src="" alt="" class="img-fluid image-fluid"
+                style="max-height:200px; height:100vh;width:100%;object-fit:stretch;">
+              {% endif %}
+             
+              <h4 class="text-center text-info"> Head of School Signature</h4>
+            </div>
+          
+            {% endfor %}
+          </div>
+          <div class="col-sm-12 p-2">
+            
+            {% for message in messages %}
+
+            <p class="text-center text-info bg-warning">{{message}}</p>
+              
+            {% endfor %}
+              
+          </div>
+        <div class="col-sm-12 card">
+
+
+          <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card-body row ">
+              {{form.media}}
+              {% for field in form %}
+
+              {% if field.name == 'school_logo' or field.name == 'school_banner_image' or field.name == "h_o_s_signature" or field.name == "school_stamp" %}
+              <div class="form-group col-sm-4">
+                <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                <div class="input-group">
+                  <div class="custom-file">
+                    {{field}}
+                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+
+                  </div>
+                  <div class="input-group-append">
+                    <span class="input-group-text">Upload</span>
+                  </div>
+
+                </div>
+                <label for="exampleInputEmail1">{{field.help_text}}</label>
+              </div>
+
+               {% elif field.name == "history" or field.name == 'description' %}
+                <div class="form-group col-sm-12">
+                  <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field}}
+                  
+                  <label class="text-info" for="exampleInputEmail1">{{field.help_text}} </label>
+                </div>
+
+              {% else %}
+              <div class="form-group col-sm-4">
+                <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                {{field}}
+                <label class="text-info" for="exampleInputEmail1">{{field.help_text}} </label>
+
+              </div>
+              {% endif %}
+
+              {% endfor %}
+
+              <div class="form-check col-sm-6">
+
+                {% if s_title %}
+                <button type="submit" class="btn btn-info ml-5">Update Student</button>
+                {% else %}
+                <button type="submit" class="btn btn-info ml-5">Submit Info</button>
+                {% endif %}
+
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+
+        
+      </div>
+    </div>
+    <section>
+      <div>
+
+
+        {% endblock content %}

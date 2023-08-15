@@ -1,0 +1,54 @@
+{% extends 'admin/base_template.html' %}
+
+
+{% block title %}
+{% if title %}
+{{title}}
+{% else %}
+Record students marks
+{% endif %}
+{% endblock title %}
+  
+
+{% block content %}
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Marks Recording</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Marks Recording</a></li>
+              <li class="breadcrumb-item active">Adding</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+     <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <div class="row ">
+        <div class="col-sm card" id="formSection">
+    
+            {% include 'marks/markFormPatial.html' %}
+      
+      </div>
+
+      <div class="col-sm-12" id="tableContent1">
+        {% comment %} {% include 'marks/editableMarksTable.html' %} {% endcomment %}
+      </div>
+
+      <div class="col-sm-12" id="tableContent">
+        {% include 'marks/marksTable.html' %}
+      </div>
+    </div>
+  </section>
+</div>
+  
+
+
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+Reply comments
+{% endblock title %}
+    
+{% block content%}
+
+<div class='container-fluid'>
+
+     <div class='' style="">
+   
+    <img style='width:33px;height:50px ;border-radius:50%;;'  src="{{ post.user.profile_picture.url }}" alt="post.username ">
+    
+    <span class="username"><a href="#">{{post.user.username|title}}</a></span>
+                  <span class="description">commented - {{post.create_date|timesince}}</span>
+  
+
+    <p>{{post.text}}</p>
+
+
+    <div class="card-footer">
+               
+                 <a href="{% url 'blog:likescomments' post.id %}"><button class="bbtn btn-default btn-sm"><i class="far  fa-thumbs-up" aria-hidden="true"></i>  Like</button></a>
+
+              <a href=" {%url 'blog:replycomments' post.pk %} "><button class="btn btn-default btn-sm"><i class="far fa-comment" aria-hidden="true"></i>Comment</button></a>
+
+                <span class="float-right text-muted">{{post.likecomment_set.count}} likes - {{post.replycomment_set.count}} replies</span>
+          </div>
+
+    <hr>
+
+
+    </div>
+<form class="form-control-plaintext form-inline d-flex " action="" method="POST">
+    {% csrf_token %}
+    {{commentform|crispy}}
+    <button class='btn-success' type="submit"> <li class="fa fa-send" ></li> Submit</button>
+</form>
+
+    
+
+
+
+<div class='' >
+    {% for comment in post.replycomment_set.all %}
+   
+    <div class='' style="">
+   
+    <img style='width:33px;height:50px ;border-radius:50%;;'  src="{{ comment.user.profile_picture.url }}" alt="comment.username ">
+    
+    <span class="username"><a href="#">{{comment.user.username|title}}</a></span>
+                  <span class="description">commented - {{comment.create_date|timesince}}</span>
+  
+
+    <p>{{comment.text}}</p>
+
+
+    <div class="card-footer">
+               
+                 <a href="{% url 'blog:likescommentreply' comment.id %}"><button class="bbtn btn-default btn-sm"><i class="far  fa-thumbs-up" aria-hidden="true"></i>  Like</button></a>
+
+              {% comment %} <a href=" {%url 'blog:replycomments' comment.pk %} "><button class="btn btn-default btn-sm"><i class="far fa-comment" aria-hidden="true"></i></button></a> {% endcomment %}
+
+                <span class="float-right text-muted">{{comment.likecommentreply_set.count}} likes </span>
+          </div>
+
+    <hr>
+
+
+    </div>
+   
+   {% endfor %}
+   </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,90 @@
+
+
+{% if guardian %}
+<h5 class="text-center text-warning bg-dark p-3"> All {{name|title}} Marks Base his/her Subjects</h5>
+{% else %}
+<h5 class="text-center text-warning bg-dark p-3"> All Staff Marks Base his/her Subjects</h5>
+    
+{% endif %}
+    
+
+      
+      
+      <div>
+       
+        <div class="card-body">
+          <div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+              <div class="jsgrid-grid-header jsgrid-header-scrollbar" style="overflow-x:auto;">
+                  <table class="jsgrid-table text-center" border=2>
+                      <tr class="jsgrid-header-row">
+                        
+                         <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 8px;">ID</th>
+                         
+                          <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 250px;">Student Name</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">Staff</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 100px;">Class</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 150px;"> Subject</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 150px;"> Month</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;"> Trimester</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;"> Home Work </th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">Home Work on</th> 
+
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;"> Test Marks</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">Test on</th> 
+
+
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;"> Project</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">Project On</th> 
+
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;"> Exam Marks</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">Exam on</th> 
+                         
+                          {% comment %} <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;"> Action</th> {% endcomment %}
+                  
+                        </tr>
+                        {% for mark in marks %}
+                        
+                        <tr class="jsgrid-row">
+                            <td class="jsgrid-cell" style="width: 150px;">{{mark.id}}</td>
+                            <td class="jsgrid-cell" style="width: 150px;">{{mark.student_id.admin.username}}</td>
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">{{mark.staff_id}}</td>
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">{{mark.class_id}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.subject_id}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.month}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.semester}}</td>
+
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.home_work}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.home_work_on}}</td>
+
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.test_mark}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.test_on}}</td>
+
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.project}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.project_on}}</td>
+                            
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.exam_mark}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.exam_on}}</td>
+                          
+                            {% comment %} <td class="jsgrid-cell" style="width: 200px;">
+                                <a href="{% url 'marks:update-marks' mark.id %}" class="btn float-right btn-info ">Update</a>
+                                <button hx-post="{% url 'marks:update-htmx-marks' mark.id %}" hx-target="#formSection"  class="btn float-right btn-info ">Update</button>
+                            </td>  {% endcomment %}
+                            
+                        </tr>
+                         {% endfor %}
+                        </table>
+                    </div>
+                    <div class="jsgrid-load-panel" style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please, wait...</div>
+                </div>
+        </div>
+        
+     
+
+
+        
+    </div>
+
+    

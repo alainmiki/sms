@@ -1,0 +1,85 @@
+
+{% extends 'base1.html' %}
+
+{% block title %}
+Events
+{% endblock title %}
+
+{% block banner %}{% endblock banner %}
+
+{% block content %}
+
+<div class="container-fluid mt-5"  id="main-content" style="min-height: 2680.06px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Events View</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">View</a></li>
+              <li class="breadcrumb-item"><a href="#">Events</a></li>
+              <li class="breadcrumb-item active">To Go</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+         
+            {% for event in events %}
+             <div class="col-md-4">
+            <!-- Default box -->
+            <div class="card collapsed-card">
+              <div class="card-header">
+                <h3 class="card-title">{{event.title|title}}</h3>
+
+                <div class="card-tools">
+                    {% if event.start_date_and_time > time and event.end_date_and_time > time %}
+                <p class="text-center  badge badge-success">Up Coming Event</p>
+                {% elif event.start_date_and_time <= time and event.end_date_and_time >= time %}
+                    <p class="text-center  badge badge-warning">Ongoin Event</p>
+                {% else %}
+                    <span class="text-cente  badge badge-info">Pass Event</>
+                {% endif %}
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body" style="display: none;">
+                {{event.description|safe}}
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer" style="display: none;">
+                  <span class ='badge badge-secondary'> Start Date & time </span> ---------- <span class=' badge badge-info'>End Date & time</span>
+
+                  <div class="" style="display: flex;">
+                
+                <span class ='badge badge-info'> {{event.start_date_and_time}}</span> -- <span class=' badge badge-secondary'>{{event.end_date_and_time}}</span>
+                  </div>
+              </div>
+              <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+          </div>
+            {% endfor %}
+
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% endblock content %}
+
+

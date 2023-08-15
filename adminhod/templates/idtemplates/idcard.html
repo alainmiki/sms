@@ -1,0 +1,116 @@
+{% extends 'admin/base_template.html' %}
+
+{% load static %}
+
+
+{% block title %}
+    ID Card Generator
+{% endblock title %}
+    
+
+{% block content %}
+
+
+
+
+
+<div class="content-wrapper" style="min-height: 1854.56px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>ID Generator</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">ID</a></li>
+                        <li class="breadcrumb-item active">Generator</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row m-sm-3">
+                <div class="col-sm-4">
+                <h6 class="text-center text-info">Click the below button to generate staffs/teachers IDs </h6>
+                <button class="btn btn-info btn-sm" hx-get="{% url 'adminhod:staff-id-card'%}" hx-target="#idcard" >Generate Staffs IDs</button>
+                </div>
+                <div class="col-sm-4">
+                    <h6 class="text-center text-info">Click the below button to generate administrators IDs </h6>
+                    <button class="btn btn-info btn sm" hx-get="{% url 'adminhod:admin-id-card'%}" hx-target="#idcard" >Generate administrators IDs </h6>
+                </div>
+                <div class="col-sm-4">
+                    <h6 class="text-center text-info">Select a class below to generate students IDs </h6>
+                    <form action="" method="post">
+                        <select class="form-control" name="stid" id="stid" hx-post="{% url 'adminhod:student-id-card' %}" hx-target="#idcard">
+
+                            <option value="all"> All<option>
+                            {% for class in classes %}
+                            <option value="{{class.id}}"> {{class.name|title}}</option>
+                            {% endfor %}
+                                
+                        </select>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" id="idcard">
+
+            {% include 'idtemplates/patialID.html' %}
+
+
+        </div>
+        <button id="back-to-top" onclick="createPDF()" class="btn btn-primary back-to-top" role="button"
+            aria-label="Scroll to top">
+            <i class="fas fa-chevron-up">print/save IDs </i>
+        </button>
+    </section>
+
+</div>
+
+
+
+
+<script>
+    function createPDF() {
+        var sTable = document.getElementById('idcard').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>{{fee.student_id.username}}</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<header>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+
+ 
+
+</script>
+
+{% endblock content %}
+
+
+
+
+
+  

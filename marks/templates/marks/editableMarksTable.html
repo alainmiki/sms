@@ -1,0 +1,87 @@
+<h5 class="text-center text-warning bg-dark p-3"> Marks base on Staff,Subject,Semester,Class</h5>
+      
+      
+      <div>
+       
+        <div class="card-body">
+          <div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+              <div class="jsgrid-grid-header jsgrid-header-scrollbar" style="overflow-x:auto;">
+                  <table class="jsgrid-table text-center" border=2>
+                      <tr class="jsgrid-header-row">
+                        
+                         <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 8px;">ID</th>
+                         
+                          <th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 250px;">Student Name</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 250px;">Staff</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 100px;">Class</th>
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 100px;"> Subject</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 100px;"> Month</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 50px;"> Trimester</th> 
+                          
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;"> Home Work</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">Home Work On</th> 
+
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;"> Test Marks</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">Test On</th> 
+
+
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;"> Project</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">Project On</th> 
+                         
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;"> Exam Marks</th> 
+                          <th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 20px;">Exam On</th> 
+                         
+                         
+                  
+                        </tr>
+                        {% for mark in marks %}
+                        
+                        <tr class="jsgrid-row">
+                            <td class="jsgrid-cell" style="width: 8px;">{{mark.id}}</td>
+                            <td class="jsgrid-cell" style="width: 150px;">{{mark.student_id.admin.username}}</td>
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">{{mark.staff_id}}</td>
+                            <td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">{{mark.class_id}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.subject_id}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.month}}</td>
+                            <td class="jsgrid-cell" style="width: 200px;">{{mark.semester}}</td>
+
+                            <td class="jsgrid-cell " style="width: 200px; background:gray" id='home_work{{mark.id}}' hx-get="{% url 'marks:get-marks_fill-input' mark.id 'home_work' mark.home_work %}" hx-swap='outerHTML'  hx-trigger='click change once'>{{mark.home_work}}</td>
+
+                            <td class="jsgrid-cell bg-secondary" style="width: 200px;" hx-get="{% url 'marks:get-marks_fill-input' mark.id 'home_work_o' mark.home_work_on %}" hx-swap='outerHTML' hx-trigger='click once' >{{mark.home_work_on}}</td>
+
+
+                            <td class="jsgrid-cell " style="width: 200px; background:gray" id='test{{mark.id}}' hx-get="{% url 'marks:get-marks_fill-input' mark.id 'test' mark.test_mark %}" hx-swap='outerHTML'  hx-trigger='click change once'>{{mark.test_mark}}</td>
+
+                            <td class="jsgrid-cell bg-secondary" style="width: 200px;" hx-get="{% url 'marks:get-marks_fill-input' mark.id 'test_o' mark.test_on %}" hx-swap='outerHTML' hx-trigger='click once' >{{mark.test_on}}</td>
+
+
+
+
+                            <td class="jsgrid-cell" style="width: 200px; background:gray" id='project{{mark.id}}' hx-get="{% url 'marks:get-marks_fill-input' mark.id 'project' mark.project %}" hx-swap='outerHTML' hx-trigger='click once'>{{mark.project}}</td>
+
+                            <td class="jsgrid-cell bg-secondary" style="width: 200px;" hx-get="{% url 'marks:get-marks_fill-input' mark.id 'project_o' mark.project_on %}" hx-swap='outerHTML' hx-trigger='click once' >{{mark.project_on}}</td>
+                          
+                           
+                            <td class="jsgrid-cell" style="width: 200px; background:gray" id='exam{{mark.id}}' hx-get="{% url 'marks:get-marks_fill-input' mark.id 'exam' mark.exam_mark %}" hx-swap='outerHTML' hx-trigger='click once'>{{mark.exam_mark}}</td>
+
+                            <td class="jsgrid-cell bg-secondary" style="width: 200px;" hx-get="{% url 'marks:get-marks_fill-input' mark.id 'exam_o' mark.exam_on %}" hx-swap='outerHTML' hx-trigger='click once' >{{mark.exam_on}}</td>
+                          
+                           
+                            
+                        </tr>
+                         {% endfor %}
+                        </table>
+                    </div>
+                    <div class="jsgrid-load-panel" style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please, wait...</div>
+                </div>
+        </div>
+        
+     
+
+
+        
+    </div>
+
+    

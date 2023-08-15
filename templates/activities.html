@@ -1,0 +1,77 @@
+
+{% extends 'base1.html' %}
+
+{% block title %}
+Extra Curicular Activities
+{% endblock title %}
+
+{% block banner %}{% endblock banner %}
+
+{% block content %}
+
+<div class="container-fluid mt-5"  id="main-content" style="min-height: 2680.06px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Extra Curicular Activities View</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">View</a></li>
+              <li class="breadcrumb-item"><a href="#">Extra Curicular Activities</a></li>
+              <li class="breadcrumb-item active">To Go</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+         
+            {% for activity in activities %}
+             <div class="col-md-4">
+            <!-- Default box -->
+            <div class="card collapsed-card">
+              <div class="card-header">
+                <h3 class="card-title">{{activity.name|title}}</h3>
+
+                <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body" style="display: none;">
+                {{activity.description|safe}}
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer" style="display: none;">
+                
+                  <div class="" style="display: flex;">
+                  </div>
+              </div>
+              <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+          </div>
+            {% endfor %}
+
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% endblock content %}
+
+

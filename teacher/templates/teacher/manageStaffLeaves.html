@@ -1,0 +1,281 @@
+
+{% extends 'admin/base_template.html' %}
+
+{% block title %} Manage Staffs Permissions{% endblock title %}
+
+{% block content %}
+
+ <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" id='main-content'>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Manage Staffs Permissions</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Staff</a></li>
+              <li class="breadcrumb-item active">Permissions</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content" id="unapproved">
+      <div class="container-fluid">
+        <div class="row">
+            <h4 class="col-12 text-center text-light bg-dark">Unapproved Permissions</h4>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Staffs Permission Details </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>Name</th>
+                    
+                    <th>Permission Start Date</th>
+                    <th>Permission Date Date</th>
+                    <th>Permission Message</th>
+                    <th>Created on</th>
+                    <th>Updated on</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                      {% for leave in aplied_leaves %}
+                       <tr>
+                  
+                    <td>{{leave.staff_id.admin.username}}</td>
+                    <td>{{leave.leave_start_date}}</td>
+                    <td>{{leave.leave_end_date}}</td>
+
+                    <td>
+                        <div class="col-md-12">
+                            <div class="card card-success collapsed-card">
+                            <div class="card-header">
+                                <h3 class="card-title ">view message</h3>
+
+                                <div class="card-tools">
+                                
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                
+                                </div>
+                                <!-- /.card-tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body" style="display: none;">
+                                {{leave.leave_message}}
+                            </div>
+                            <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </td>
+                    <td>{{leave.created_at}}</td>
+                    <td>{{leave.updated_at}}</td>
+                    <td class="card bg-info">
+                        <a class="text-info text-center p-1" href=" {% url 'teacher:edit-leaves' leave.id %}" >Approve</a>
+                       
+                    </td>
+                    </tr>
+                      
+                      {% endfor %}
+                 
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                   
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!-- /.col -->
+
+           <h4 class="col-12 text-center text-light bg-dark">Approved Permissions</h4>
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Staffs Permission Details </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <!-- <th>Username</th> -->
+                    <th>Name</th>
+                    
+                    <th>Permission Start Date</th>
+                    <th>Permission Date Date</th>
+                    <th>Permission Message</th>
+                    <th>Created on</th>
+                    <th>Updated on</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                      {% for leave in aproved_leaves %}
+                       <tr>
+                    <td>{{staff.id}}</td>
+                    <!-- <td>{{staff.admin.username}}</td> -->
+                   
+                    <td>{{leave.staff_id.admin.username}}</td>
+                    <td>{{leave.leave_start_date}}</td>
+                    <td>{{leave.leave_end_date}}</td>
+
+                    <td>
+                        <div class="col-md-12">
+                            <div class="card card-success collapsed-card">
+                            <div class="card-header">
+                                <h3 class="card-title ">view message</h3>
+
+                                <div class="card-tools">
+                                
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                
+                                </div>
+                                <!-- /.card-tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body" style="display: none;">
+                                {{leave.leave_message}}
+                            </div>
+                            <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </td>
+                    <td>{{leave.created_at}}</td>
+                    <td>{{leave.updated_at}}</td>
+                    <td class="card bg-success">
+                        <a class="text-info text-center p-1" href=" {% url 'teacher:edit-leaves-unapproved' leave.id %}" >Unapproved</a>
+                       
+                    </td>
+                    </tr>
+                      
+                      {% endfor %}
+                 
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                   
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!-- /.col -->
+
+
+             <h4 class="col-12 text-center text-light bg-dark">Expired Permissions</h4>
+          <div class="col-12"  id="expired>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Staffs Permission Details </h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
+                    <th>ID</th>
+                    <!-- <th>Username</th> -->
+                    <th>Name</th>
+                    
+                    <th>Permission Start Date</th>
+                    <th>Permission Date Date</th>
+                    <th>Permission Message</th>
+                    <th>Created on</th>
+                    <th>Updated on</th>
+                    <th>Status</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                      {% for leave in Expired_leaves %}
+                       <tr>
+                    <td>{{staff.id}}</td>
+                    <!-- <td>{{staff.admin.username}}</td> -->
+                   
+                    <td>{{leave.staff_id.admin.username}}</td>
+                    <td>{{leave.leave_start_date}}</td>
+                    <td>{{leave.leave_end_date}}</td>
+
+                    <td>
+                        <div class="col-md-12">
+                            <div class="card card-success collapsed-card">
+                            <div class="card-header">
+                                <h3 class="card-title ">view message</h3>
+
+                                <div class="card-tools">
+                                
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                                
+                                </div>
+                                <!-- /.card-tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body" style="display: none;">
+                                {{leave.leave_message}}
+                            </div>
+                            <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </td>
+                    <td>{{leave.created_at}}</td>
+                    <td>{{leave.updated_at}}</td>
+                    <td class="card bg-danger">{{leave.leave_status}} <span class="text-info bg-danger">Expired</span></td>
+                    </tr>
+                      
+                      {% endfor %}
+                 
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                   
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!-- /.col -->
+
+        
+
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+{% endblock content %}

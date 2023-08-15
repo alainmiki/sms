@@ -1,0 +1,39 @@
+
+      <form action="" method="post">
+            
+            {% csrf_token %}
+          <div class="card-body row ">
+            <div class="col-sm-12"  id="new">
+              
+            </div>
+          
+          {% for field in form %}
+                
+                <div class="form-group col-sm-3">
+                  <label for="exampleInputEmail1">{{field.label_tag}}</label>
+                  {{field|safe}}
+                  <label class="text-info" for="exampleInputEmail1">{{field.help_text}}  </label>
+                  
+                </div>
+             
+            
+          {% endfor %}
+
+          {% for error in form.errors %}
+          <p class="text-danger text-center">{{error}}</p>
+          {% endfor %}
+         
+          <div class="form-group col-sm-3 d-flex align-items-center justify-content-end ">
+            
+              <button type="submit" hx-target="#tableContent" hx-post="{% url 'fees:fees-filter' %}" class="btn float-right btn-info ">Filter</button>
+          
+          </div>
+           {% for message in messages %}
+          <p class="text-danger text-center">{{message}}</p>
+          {% endfor %}
+           
+          </div>
+
+          
+          
+      </form>
