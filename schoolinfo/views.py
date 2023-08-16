@@ -17,7 +17,7 @@ def home(request):
     try:
         schoolinfo=SchoolInformation.objects.all()
     except:
-        schoolinfo=[0]
+        schoolinfo=['0']
         
     context={
         'info':schoolinfo[0],
