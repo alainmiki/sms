@@ -44,17 +44,17 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 
-CSRF_TRUSTED_ORIGINS = ['https://sms-live.up.railway.app/']
+# CSRF_TRUSTED_ORIGINS = ['https://sms-live.up.railway.app/']
 
 CORS_REPLACE_HTTPS_REFERER = True
 
-CSRF_COOKIE_DOMAIN = 'sms-live.up.railway.app'
+# CSRF_COOKIE_DOMAIN = 'sms-live.up.railway.app'
 
-CORS_ORIGIN_WHITELIST = (
-   'https://sms-live.up.railway.app',
-    'sms-live.up.railway.app',
+# CORS_ORIGIN_WHITELIST = (
+#    'https://sms-live.up.railway.app',
+#     'sms-live.up.railway.app',
     
-)
+# )
 
 
 # Application definition
