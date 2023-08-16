@@ -36,7 +36,7 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost',
-                 '127.0.0.1','https://sms-production-c4a6.up.railway.app', '*']
+                 '127.0.0.1','https://sms-production-c4a6.up.railway.app',]
 
 
 # Application definition

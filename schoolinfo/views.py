@@ -15,12 +15,12 @@ from .models import Activity, SchoolInformation
 
 def home(request):
     try:
-        schoolinfo=SchoolInformation.objects.all()
+        schoolinfo=SchoolInformation.objects.all()[0]
     except:
         schoolinfo=[]
         
     context={
-        'info':schoolinfo[0],
+        'info':schoolinfo,
         'schoolinfo':schoolinfo,
         'activities':Activity.objects.all()
     }
