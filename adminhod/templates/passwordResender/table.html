@@ -26,7 +26,7 @@
                             <td class="jsgrid-cell" style="width: 150px;">{{user|upper}}</td>
                             
                             <td class="jsgrid-cell" style="width: 200px;">
-                                <a hx-post="{% url 'adminhod:password-resend' user.id %}" hx-target="#message" 
+                                <a hx-post="{% url 'adminhod:password-resend' user.user.email %}" hx-target="#message" 
                                     class="btn float-right btn-info ">Resend Password</a>
                             </td>
     

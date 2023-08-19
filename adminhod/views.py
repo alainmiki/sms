@@ -127,6 +127,30 @@ class Signup(View):
         return render(request, "admin/signup.html")
 
 
+
+def redirect_to_dashboard(request):
+    """_summary_
+
+    Args:
+        request (_type_): _description_
+
+    Returns:
+        _type_: _description_
+        
+    Note: returns user to their dashboard if the click the dashboard  link on the landing page
+    """
+    if request.user.user_type == '2':
+            return redirect("teacher:profile")
+
+    if request.user.user_type == '3':
+        return redirect("student:profile")
+
+    if request.user.user_type == '1':
+        return redirect("adminhod:dashboard")
+    if request.user.user_type == '4':
+        return redirect("guardian:profile")
+    
+
 class admindashbord(View):
 
     def post(self, request):
@@ -622,10 +646,14 @@ class passwordStorView(View):
         return render(request,'passwordResender/table.html',context)
 
 
-def resend_password(request,id):
-    
-    password_obj=PasswordStore.objects.get(id=id)
-    # print(password_obj.user.email)
+def resend_password(request,email):
+    user=CustomUser.objects.get(email=email)
+    new_passwd=f'{user.uid}{user.first_name[1]}{user.last_name[1]}1'
+    user.set_password(new_passwd)
+    PasswordStore.objects.update_or_create(user=user,password=new_passwd)
+    password_obj=PasswordStore.objects.get(user=user)
+  
+    print(password_obj.user.email,password_obj.password)
     try:
         send_email_func(recipient_list=[password_obj.user.email,],from_email="smsprogram@gmail.com",body=f"Hay Dear  {password_obj.user.username} here is your resend password:'{password_obj.password}'. Use it to login into your School account with the combination of your Email:'{password_obj.user.email}'",subject="Your School website Account Password",)
     except:

@@ -14,19 +14,19 @@ user_department_data = (('1', "admin"), ('2', "secretary"),
 genders=(('M',"Male"),("F","Female"),("O","Others"))
 
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email,username,password=None):
+    def create_user(self, email,username,user_type,password=None):
         if not email:
             raise ValueError('User most have an email address.')
         if not username:
             raise ValueError("user most have a username.") 
-        user=self.model(email=self.normalize_email(email),username=username,)
+        user=self.model(email=self.normalize_email(email),username=username,user_type=user_type)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, password):
+    def create_superuser(self, email, username,user_type, password):
         user = self.create_user(
-            email=self.normalize_email(email), username=username,password=password)
+            email=self.normalize_email(email), username=username,password=password,user_type=user_type)
         user.is_admin=True
         user.is_staff=True
         # user.is_active=True
@@ -62,7 +62,7 @@ class CustomUser(AbstractBaseUser):
     objects= CustomUserManager()
     
     USERNAME_FIELD='email'
-    REQUIRED_FIELDS=["username","password"]
+    REQUIRED_FIELDS=["username",'user_type',"password"]
     
     def __str__(self) -> str:
         return self.username

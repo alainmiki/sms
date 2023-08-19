@@ -655,7 +655,8 @@ class AdmissionView(View):
             messages.info(request,'Your Admission Details Was Send Successfully :)')
             return redirect('student:admission')
         else:
-            messages.warning(request,'Your Admission Details Was not  Send Successfully make sure you fill every entry carefully (:')
+            messages.warning(request,'Your Admission Details Was not  Send Successfully make sure you fill every entry carefully (:(❁´◡`❁)')
+            print(form.errors)
             context={
                 'form':form,
             }

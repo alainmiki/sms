@@ -1,5 +1,15 @@
  <div class="container-fluid">
+   <div class="col-md-12">
+          
+          {% for message in messages %}
+
+          <p class="alert alert-warning">{{message}}</p>
+            
+          {% endfor %}
+            
+        </div>
       <div class="row">
+       
         {% for candidate in admissions %}
 
         <div class="col-md-12">

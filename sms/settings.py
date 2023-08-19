@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-#zf41@8)=ii-0tcl6v+bfu#p77(wd$q2-iklx175#0&3wtswwo
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+# ALLOWED_HOSTS=[]
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost',
                  '127.0.0.1','sms-live.up.railway.app','*']
@@ -44,16 +44,20 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 
-CSRF_TRUSTED_ORIGINS = ['https://sms-live.up.railway.app']
-CSRF_ALLOWED_ORIGINS = ["https://sms-live.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ['https://sms-live.up.railway.app','http://0.0.0.0', 'http://localhost',
+                 'http://127.0.0.1',]
+CSRF_ALLOWED_ORIGINS = ["https://sms-live.up.railway.app",'http://0.0.0.0', 'http://localhost',
+                 'http://127.0.0.1',]
 
-CORS_REPLACE_HTTPS_REFERER = True
+CORS_REPLACE_HTTPS_REFERRER = True
 
 CSRF_COOKIE_DOMAIN = 'sms-live.up.railway.app'
 
 CORS_ORIGIN_WHITELIST = (
-   'https://sms-live.up.railway.app',
-    'sms-live.up.railway.app',
+   'https://sms-live.up.railway.app','http://0.0.0.0', 'http://localhost',
+                 '127.0.0.1',
+    'sms-live.up.railway.app','http://0.0.0.0', 'http://localhost',
+                 'http://127.0.0.1',
     
 )
 
@@ -145,6 +149,8 @@ WSGI_APPLICATION = 'sms.wsgi.application'
 # }
 
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -193,16 +199,47 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+
+
+AWS_ACCESS_KEY_ID = 'AKIAVBY2MECXTATDMX7H'
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'smsprogram-storage'
+AWS_S3_FILE_OVERWRITE=False
+AWS_DEFAULT_ACL=None
+AWS_S3_CUSTOM_DOMAIN = 'dcaezy3xv6q35.cloudfront.net'
+
+AWS_LOCATION = 'static'
+AWS_MEDIA_LOCATION = 'media'
+
+STATIC_URL = '%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+MEDIAL_URL = '%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+     BASE_DIR / "static",
+    # STATIC_URL,
+]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 # STATIC_URL = '/staticfiles/'
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / "static",
-#     '/var/www/static/',
-# ]
 
 # MEDIA_URL = '/media/'
 
 # MEDIA_ROOT="media"
+
+
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STORAGES = {
+#     # ...
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -247,39 +284,6 @@ EMAIL_USE_TLS = True
 # EMAIL_USE_SSL = False
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-
-AWS_ACCESS_KEY_ID = 'AKIAVBY2MECXTATDMX7H'
-AWS_SECRET_ACCESS_KEY = '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'
-
-AWS_STORAGE_BUCKET_NAME = 'smsprogram-storage'
-AWS_S3_FILE_OVERWRITE=False
-AWS_DEFAULT_ACL=None
-AWS_S3_CUSTOM_DOMAIN = 'dcaezy3xv6q35.cloudfront.net'
-
-AWS_LOCATION = 'static'
-AWS_MEDIA_LOCATION = 'media'
-
-STATIC_URL = '%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-MEDIAL_URL = '%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-
-
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-     BASE_DIR / "static",
-    # STATIC_URL,
-]
-# STATIC_ROOT = BASE_DIR / "staticfiles"
-
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STORAGES = {
-#     # ...
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
 
 # Debugging in heroku live
 LOGGING = {

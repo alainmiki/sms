@@ -11,6 +11,7 @@ urlpatterns=[
     path("signup", views.Signup.as_view(), name="signup"),
     
     path("dashboard", views.admindashbord.as_view(), name="dashboard"),
+    path("redirect_dashboard", views.redirect_to_dashboard, name="redirect_dashboard"),
     
     path("event-register", views.EventView.as_view(), name="event-register"),
     
@@ -43,7 +44,7 @@ urlpatterns=[
     path("staff-document-delete/<int:id>", views.delete_staff_document, name="staff-document-delete"),
     
     path("password-store", views.passwordStorView.as_view(), name="password-store"),
-    path("password-resend/<int:id>", views.resend_password, name="password-resend"),
+    path("password-resend/<str:email>", views.resend_password, name="password-resend"),
     
     
     path("manage_admins", views.AddAministrators.as_view(), name="manage_admins"),

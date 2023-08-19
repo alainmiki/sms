@@ -42,7 +42,7 @@ class registration(View):
             profile_picture = form.cleaned_data['profile_picture']
            
             username=f"{first_name} {last_name}"
-            # print(subjects)
+            print(subjects)
             # print(password, repeatpassword)
             if password == repeatpassword:
                 
