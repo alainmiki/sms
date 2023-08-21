@@ -168,7 +168,7 @@ class Approve_admissions(View):
         guardian_address = admission.guardian_address
         guardian_phone=admission.guardian_phone
         guardian_email=admission.guardian_email
-        student = Student.objects.get(admin=instance)
+        student = Student.objects.get(admin__email=email)
         
         if CustomUser.objects.filter(username=guardian_full_name,email=guardian_email).exists():
             guardian_object=Guardian.objects.get(admin__email=guardian_email)
