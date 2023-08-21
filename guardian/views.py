@@ -95,7 +95,7 @@ class GuardianReg(View):
 
                 instance.username = f"{first_name} {last_name}"
                 instance.save()
-                Guardian_instance = Guardian.objects.get(admin=instance)
+                Guardian_instance = Guardian.objects.create(admin=instance)
                 
                 Guardian_instance.title = title
                 print(children)

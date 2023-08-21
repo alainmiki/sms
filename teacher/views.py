@@ -51,7 +51,7 @@ class registration(View):
                 instance.username=username
                 instance.uid=uuid_random
                 instance.save()
-                staff = Staff.objects.get(admin=instance)
+                staff = Staff.objects.create(admin=instance)
                
                 staff.duty_post = duty_post
                 staff.matricule = matricule

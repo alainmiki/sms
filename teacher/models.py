@@ -75,11 +75,11 @@ class NotificationStaff(models.Model):
         return str(self.staff_id.admin.first_name)
 
 
-@receiver(post_save, sender=CustomUser)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        if instance.user_type == '2':
-            Staff.objects.create(admin=instance)
+# @receiver(post_save, sender=CustomUser)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         if instance.user_type == '2':
+#             Staff.objects.create(admin=instance)
 
 
 # @receiver(post_save, sender=CustomUser)
