@@ -201,23 +201,23 @@ USE_TZ = True
 
 
 
-# AWS_ACCESS_KEY_ID = 'AKIAVBY2MECXTATDMX7H'
-# AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = 'AKIAVBY2MECXTATDMX7H'
+AWS_SECRET_ACCESS_KEY = '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'
 
-# AWS_STORAGE_BUCKET_NAME = 'smsprogram-storage'
-# AWS_S3_FILE_OVERWRITE=False
-# AWS_DEFAULT_ACL=None
-# AWS_S3_CUSTOM_DOMAIN = 'dcaezy3xv6q35.cloudfront.net'
+AWS_STORAGE_BUCKET_NAME = 'smsprogram-storage'
+AWS_S3_FILE_OVERWRITE=False
+AWS_DEFAULT_ACL=None
+AWS_S3_CUSTOM_DOMAIN = 'dcaezy3xv6q35.cloudfront.net'
 
-# AWS_LOCATION = 'static'
-# AWS_MEDIA_LOCATION = 'media'
+AWS_LOCATION = 'static'
+AWS_MEDIA_LOCATION = 'media'
 
-# STATIC_URL = '%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-# MEDIAL_URL = '%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATIC_URL = '%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+MEDIAL_URL = '%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 
 
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
