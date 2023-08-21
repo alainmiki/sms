@@ -47,7 +47,7 @@ class ClassRoom(models.Model):
 
 class Student(models.Model):
     admin=models.OneToOneField(CustomUser,on_delete=models.CASCADE)
-    entry=models.CharField(choices=entries, max_length=6,default=("N","New"))
+    entry=models.CharField(choices=entries, max_length=116,default=("N","New"))
     class_room = models.ForeignKey(
         ClassRoom, on_delete=models.DO_NOTHING, related_name="class_room", blank=True, null=True)
     department = models.ForeignKey(
