@@ -224,8 +224,8 @@ STATICFILES_DIRS = [
      BASE_DIR / "static",
     # STATIC_URL,
 ]
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATIC_URL = '/staticfiles/'
+STATIC_ROOT = BASE_DIR / "static"
+STATIC_URL = '/static/'
 
 
 MEDIA_URL = '/media/'
@@ -236,7 +236,7 @@ MEDIA_ROOT="media"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STORAGES = {
     # ...
-    "staticfiles": {
+    "static": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
