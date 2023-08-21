@@ -35,12 +35,12 @@ class CustomUserManager(BaseUserManager):
         return user
 
 class CustomUser(AbstractBaseUser):
-    uid=models.CharField(max_length=50, blank=True,null=True)
+    uid=models.CharField(max_length=550, blank=True,null=True)
     email=models.EmailField(max_length=254,verbose_name='email',unique=True)
-    first_name=models.CharField(max_length=50, blank=True,null=True)
-    last_name=models.CharField(max_length=50, blank=True,null=True)
-    username=models.CharField(max_length=50, unique=True,)
-    gender=models.CharField(choices=genders, max_length=10, blank=True,null=True)
+    first_name=models.CharField(max_length=550, blank=True,null=True)
+    last_name=models.CharField(max_length=550, blank=True,null=True)
+    username=models.CharField(max_length=550,)
+    gender=models.CharField(choices=genders, max_length=510, blank=True,null=True)
 
     place_of_birth = models.CharField(max_length=200, blank=True, null=True)
     
@@ -54,7 +54,7 @@ class CustomUser(AbstractBaseUser):
     is_staff=models.BooleanField(default=False)
     is_admin=models.BooleanField(default=False)
     is_superuser=models.BooleanField(default=False)
-    profile_picture=models.ImageField(upload_to="profile_pictures",  max_length=100,default="static/images/default.jpg", blank=True, null=True)
+    profile_picture=models.ImageField(upload_to="profile_pictures",  max_length=300,default="static/images/default.jpg", blank=True, null=True)
     
   
     user_type = models.CharField( choices=user_types_data, max_length=15, blank=True,null=True)
