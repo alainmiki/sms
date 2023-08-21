@@ -51,7 +51,7 @@ class RegisterStudent(View):
                 # CustomUser.check_password()
                 instance.save()
                 # print(pwd.check_password(passwd))
-                student = Student.objects.create(admin=pwd)
+                student = Student.objects.get(admin=pwd)
                 student.date_of_birth=dob
                 student.class_room = class_room
                 student.department = department

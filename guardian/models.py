@@ -23,26 +23,26 @@ class NotificationGuardian(models.Model):
         return str(self.guardian_id.admin.username)
 
 
-# @receiver(post_save, sender=CustomUser)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     # print(instance._state)
-#     if created:
-#         if instance.user_type == '4':
+@receiver(post_save, sender=CustomUser)
+def create_user_profile(sender, instance, created, **kwargs):
+    # print(instance._state)
+    if created:
+        if instance.user_type == '4':
             
-#             Guardian.objects.create(admin=instance)
+            Guardian.objects.create(admin=instance)
       
-# @receiver(pre_save, sender=CustomUser)
-# def create_user_profile(sender, instance, **kwargs):
-#     if not instance._state.adding:
-#         print('this is and update',instance.user_type)
-#         if instance.user_type == '4':
-#             g_obj=Guardian.objects.filter(admin=instance).exists()
-#             if not g_obj:
-#                 Guardian.objects.create(admin=instance)
-#             else:
-#                 print('existes')
-#     else:
-#         print("this is a create model",instance._state.adding)
-#         # if instance.user_type == '4':
-#         #     Guardian.objects.create(admin=instance)
+@receiver(pre_save, sender=CustomUser)
+def create_user_profile(sender, instance, **kwargs):
+    if not instance._state.adding:
+        print('this is and update',instance.user_type)
+        if instance.user_type == '4':
+            g_obj=Guardian.objects.filter(admin=instance).exists()
+            if not g_obj:
+                Guardian.objects.create(admin=instance)
+            else:
+                print('existes')
+    else:
+        print("this is a create model",instance._state.adding)
+        # if instance.user_type == '4':
+        #     Guardian.objects.create(admin=instance)
       

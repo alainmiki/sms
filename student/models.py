@@ -230,30 +230,30 @@ class AttendanceReport(models.Model):
         return str(self.student_id.admin.username)
 
 
-# @receiver(post_save, sender=CustomUser)
-# def create_user_profile(sender,instance,created, **kwargs):
-#     if created:
+@receiver(post_save, sender=CustomUser)
+def create_user_profile(sender,instance,created, **kwargs):
+    if created:
      
-#         if instance.user_type == '3':
-#             if Student.objects.filter(admin=instance).exists():
-#                 print("Student profile user created already")
-#             print("Student profile user created newly")
+        if instance.user_type == '3':
+            if Student.objects.filter(admin=instance).exists():
+                print("Student profile user created already")
+            print("Student profile user created newly")
                 
-#             # else:
-#             Student.objects.create(admin=instance)
+            # else:
+            Student.objects.create(admin=instance)
 
 
-# @receiver(pre_save, sender=CustomUser)
-# def create_user_profile(sender, instance, **kwargs):
-#     if not instance._state.adding:
-#         print('this is and update',instance.user_type)
-#         if instance.user_type == '3':
-#             g_obj=Student.objects.filter(admin=instance).exists()
-#             if not g_obj:
-#                 Student.objects.create(admin=instance)
-#             else:
-#                 print('exists')
-#     else:
-#         print("this is a create model",instance._state.adding)
-#         # if instance.user_type == '3':
-#         #     Student.objects.create(admin=instance)
+@receiver(pre_save, sender=CustomUser)
+def create_user_profile(sender, instance, **kwargs):
+    if not instance._state.adding:
+        print('this is and update',instance.user_type)
+        if instance.user_type == '3':
+            g_obj=Student.objects.filter(admin=instance).exists()
+            if not g_obj:
+                Student.objects.create(admin=instance)
+            else:
+                print('exists')
+    else:
+        print("this is a create model",instance._state.adding)
+        # if instance.user_type == '3':
+        #     Student.objects.create(admin=instance)

@@ -148,7 +148,7 @@ class Approve_admissions(View):
                 instance.save()
                 print(instance.check_password(passwd),passwd)
                 
-                student = Student.objects.create(admin=instance)
+                student = Student.objects.get(admin=instance)
                 student.date_of_birth=date_of_birth
                 student.class_room = class_room
                 student.department = department
