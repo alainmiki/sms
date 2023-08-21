@@ -115,7 +115,12 @@
                                 <div class="btn-001 text-center">
                                     <ul>
                                         <li><a href="{% url 'student:admission' %}">FIND ADMINSION</a></li>
+                                        
+                                        {% if not request.user.is_authenticated %}
                                         <li><a class="text-light bg-info" href="{% url 'adminhod:login' %} ">LOGIN</a></li>
+                                            
+                                        {% endif %}
+                                            
                                     </ul>
                                 </div>
                             </div>

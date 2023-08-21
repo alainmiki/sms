@@ -4,7 +4,7 @@ from django.db import models
 from django.urls import reverse
 from adminhod.models import  CustomUser
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save,pre_save
 
 from ckeditor.fields import RichTextField
 # from guardian.models import Guardian
@@ -235,7 +235,25 @@ def create_user_profile(sender,instance,created, **kwargs):
     if created:
      
         if instance.user_type == '3':
-           
+            if Student.objects.filter(admin=instance).exists():
+                print("Student profile user created already")
+            print("Student profile user created newly")
+                
+            # else:
             Student.objects.create(admin=instance)
 
 
+@receiver(pre_save, sender=CustomUser)
+def create_user_profile(sender, instance, **kwargs):
+    if not instance._state.adding:
+        print('this is and update',instance.user_type)
+        if instance.user_type == '3':
+            g_obj=Student.objects.filter(admin=instance).exists()
+            if not g_obj:
+                Student.objects.create(admin=instance)
+            else:
+                print('exists')
+    else:
+        print("this is a create model",instance._state.adding)
+        # if instance.user_type == '3':
+        #     Student.objects.create(admin=instance)

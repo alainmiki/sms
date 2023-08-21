@@ -84,7 +84,6 @@ def full_notification(request):
     return render(request,'notifications.html',context)
 
 
-
 class Approve_admissions(View):
     
     def get(self,request,id=None):
@@ -112,37 +111,42 @@ class Approve_admissions(View):
         
     
         user_type = admission.user_type
-        
         student_uuid=generate_ref_code()
         passwd=f'{student_uuid}{first_name[1]}{last_name[1]}'
         initial={
             'first_name':first_name,'last_name':last_name,'email':email,'gender':gender,'place_of_birth':place_of_birth,'address':address,'phone':phone,'user_type':user_type,'profile_picture':profile_picture,'class_room':class_room,'department':department,'date_of_birth':date_of_birth,'password1':passwd,'password2':passwd
         }
         customuser=StudentRegistrationForm(initial)
-        
-        if customuser.is_valid():
-            if CustomUser.objects.filter(email=email).exists():
-                print("email exist")
-                messages.info(request,"This email already exist in our system so you can't use it.NOTE:'All emails in our system are unique'")
-                admissions=Admission.objects.all()
-                context={'admissions':admissions,}
-                return render(request,'admissionList.html',context)
-            else:
+        if CustomUser.objects.filter(email=email).exists():
+            print("user with this email exist")
+            # messages.info(request,"This email already has an account in our system please try another legit one")
+            # admissions=Admission.objects.all()
+            # context={'admissions':admissions,}
+            # return render(request,'admissionList.html',context)
+        #    =============this below lines are for bug finding=======
+            # user_obj=CustomUser.objects.get(email=email)
+            # if Student.objects.filter(admin=user_obj).exists():
+            #     student = Student.objects.get(admin=user_obj)
+            # else:
+            #     student=Student.objects.create(admin=user_obj)
+            #     student.date_of_birth=date_of_birth
+            #     student.class_room = class_room
+            #     student.department = department
+            #     student.save()
+            # ==========================================================
+        else:
+            if customuser.is_valid():
                 # print('valid',passwd)
             
                 instance=customuser.save()
                 instance.username=f'{first_name} {last_name}'
                 instance.uid=student_uuid
-               
+                instance.set_password(passwd)
+                
                 instance.profile_picture=profile_picture
                 
                 instance.save()
-                u=CustomUser.objects.get(pk=instance.id)
-                u.set_password(passwd)
-                u.save()
-                print("this actual password is :",u.check_password(passwd),passwd)
-                
-                PasswordStore.objects.create(user=instance,password=passwd)
+                print(instance.check_password(passwd),passwd)
                 student = Student.objects.get(admin=instance)
                 student.date_of_birth=date_of_birth
                 student.class_room = class_room
@@ -154,22 +158,18 @@ class Approve_admissions(View):
                 send_email_func(recipient_list=[email,],from_email="smsprogram@gmail.com",body=f"Hay Dear {first_name} {last_name} Your admission into our school has been approved here is your password:'{passwd}'. Use it to login into your account with the combination of your Email:'{email}'",subject="Your Admission into our School has been approved",)
             
                 send_email_func(recipient_list=[email,],from_email="smsprogram@gmail.com",body=f"Hay Dear {first_name} {last_name} here is your password:'{passwd}'. Use it to login into your account with the combination of your Email:'{email}'",subject="Your School website Account Password",)
-        
-        else:
-            print('not valid',customuser.errors)
-            messages.info(request,customuser.errors)
-            admissions=Admission.objects.all()
-            context={'admissions':admissions,}
-            return render(request,'admissionList.html',context)
             
+            else:
+                print('not valid',customuser.errors)
+                
         guardian_title=admission.guardian_title
         guardian_full_name = admission.guardian_full_name
         guardian_address = admission.guardian_address
         guardian_phone=admission.guardian_phone
         guardian_email=admission.guardian_email
+        student = Student.objects.get(admin=instance)
         
         if CustomUser.objects.filter(username=guardian_full_name,email=guardian_email).exists():
-            # print("exits guaidian")
             guardian_object=Guardian.objects.get(admin__email=guardian_email)
             guardian_object.children.add(student)
             guardian_object.save()
@@ -180,9 +180,9 @@ class Approve_admissions(View):
             uuid=generate_ref_code()
             passwd1=f'{uuid}{first_name[1]}{last_name[1]}'
             
-            user=get_user_model().objects.create_user(email=guardian_email,username=guardian_full_name)
+            user=get_user_model().objects.create_user(email=guardian_email,username=guardian_full_name,user_type='4')
             user.set_password(passwd1)
-            user.user_type='4'
+            # user.user_type='4'
             user.uid=uuid
             user.first_name=firstname
             user.last_name=lastname
@@ -202,8 +202,9 @@ class Approve_admissions(View):
             guardian_object=Guardian.objects.get(admin__email=guardian_email,admin__username=guardian_full_name)
             guardian_object.title=guardian_title
             guardian_object.save()
+            # student = Student.objects.get(admin=instance)
             guardian_object.children.add(student)
-            # print(user,passwd1)
+            print(user,passwd1)
             send_email_func(recipient_list=[guardian_object.admin.email,],from_email="smsprogram@gmail.com",body=f"Hay {guardian_object.title}  {guardian_object.admin.username} here is your password:'{passwd1}'. Use it to login into our School account with the combination of your Email:'{guardian_object.admin.email}'. You are grand this access because your child has been admitted into you school",subject="Login Information in our School website Account Password",)
           
         send_email_func(recipient_list=[guardian_object.admin.email,],from_email="smsprogram@gmail.com",body=f"Hay Dear {guardian_object.title}  {guardian_object.admin.username} Your child by name '{student.admin.username}' admission into our school has been approved here is his/her password:'{passwd}'. He/she should Use it to login into his/her account with the combination his/her Email:'{student.admin.email}'",subject="Your child Admission into our School has been approved",)
@@ -214,12 +215,12 @@ class Approve_admissions(View):
         admission.delete()
         
         admissions=Admission.objects.all()
-        messages.info(request,"Admission Accepted Successfully")
         context={'admissions':admissions,}
         return render(request,'admissionList.html',context)
         
         # return HttpResponse("Done")
         
+
 
 def decline_admission(request,id):
     admission=Admission.objects.get(id=id)

@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-#zf41@8)=ii-0tcl6v+bfu#p77(wd$q2-iklx175#0&3wtswwo
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# ALLOWED_HOSTS=[]
+ALLOWED_HOSTS=[]
 
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost',
                  '127.0.0.1','sms-live.up.railway.app','*']
@@ -107,7 +107,7 @@ CRISPY_CLASS_CONVERTERS = {"textinput": "textinput textInput inputtext"}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -153,7 +153,7 @@ WSGI_APPLICATION = 'sms.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'railway',
         'USER': 'postgres',
         'PASSWORD': 'b6Y0ewdKKnr0o1GsA9MG',
@@ -201,23 +201,23 @@ USE_TZ = True
 
 
 
-AWS_ACCESS_KEY_ID = 'AKIAVBY2MECXTATDMX7H'
-AWS_SECRET_ACCESS_KEY = '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'
+# AWS_ACCESS_KEY_ID = 'AKIAVBY2MECXTATDMX7H'
+# AWS_SECRET_ACCESS_KEY = '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'
 
-AWS_STORAGE_BUCKET_NAME = 'smsprogram-storage'
-AWS_S3_FILE_OVERWRITE=False
-AWS_DEFAULT_ACL=None
-AWS_S3_CUSTOM_DOMAIN = 'dcaezy3xv6q35.cloudfront.net'
+# AWS_STORAGE_BUCKET_NAME = 'smsprogram-storage'
+# AWS_S3_FILE_OVERWRITE=False
+# AWS_DEFAULT_ACL=None
+# AWS_S3_CUSTOM_DOMAIN = 'dcaezy3xv6q35.cloudfront.net'
 
-AWS_LOCATION = 'static'
-AWS_MEDIA_LOCATION = 'media'
+# AWS_LOCATION = 'static'
+# AWS_MEDIA_LOCATION = 'media'
 
-STATIC_URL = '%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-MEDIAL_URL = '%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+# STATIC_URL = '%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+# MEDIAL_URL = '%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 
 
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -225,21 +225,21 @@ STATICFILES_DIRS = [
     # STATIC_URL,
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
-# STATIC_URL = '/staticfiles/'
+STATIC_URL = '/staticfiles/'
 
 
-# MEDIA_URL = '/media/'
+MEDIA_URL = '/media/'
 
-# MEDIA_ROOT="media"
+MEDIA_ROOT="media"
 
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STORAGES = {
-#     # ...
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

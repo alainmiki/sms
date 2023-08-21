@@ -41,7 +41,8 @@ def create_user_profile(sender, instance, **kwargs):
                 Guardian.objects.create(admin=instance)
             else:
                 print('existes')
-    else:print("this is a create model")
+    else:
+        print("this is a create model",instance._state.adding)
         # if instance.user_type == '4':
         #     Guardian.objects.create(admin=instance)
       
