@@ -14,16 +14,16 @@ from .models import Activity, SchoolInformation
 # Create your views here.
 
 def home(request):
-    try:
-        schoolinfo=SchoolInformation.objects.all()
-    except:
-        schoolinfo=['0']
-        
     context={
-        'info':schoolinfo[0],
-        'schoolinfo':schoolinfo,
+        
         'activities':Activity.objects.all()
     }
+    try:
+        schoolinfo=SchoolInformation.objects.all()
+        context['info']=schoolinfo[0]
+        context['schoolinfo']=schoolinfo
+    except:
+        pass
     
     return render(request,"schoolinfo/home.html",context)
 
